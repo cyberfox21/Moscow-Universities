@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Zagruzka extends Activity {
+public class LoadingActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public class Zagruzka extends Activity {
                     } catch (Exception e) {
 
                     } finally {
-                        Intent i = new Intent(Zagruzka.this,
-                                MainActivity.class);
+                        Intent i = new Intent(LoadingActivity.this,
+                                MenuActivity.class);
                         startActivity(i);
                         finish();
                     }
@@ -51,7 +51,7 @@ public class Zagruzka extends Activity {
                         Intent intent = getIntent();
                         String doc = intent.getStringExtra("doc");
                         int id = intent.getIntExtra("id", R.id.hse_button);
-                        Intent i = new Intent(Zagruzka.this,
+                        Intent i = new Intent(LoadingActivity.this,
                                 DescriptionActivity.class);
                         i.putExtra("id", id);
                         i.putExtra("doc", doc);

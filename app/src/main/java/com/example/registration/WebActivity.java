@@ -33,7 +33,7 @@ public class WebActivity extends Activity implements View.OnClickListener {
 
     public void onClick(View view) {
             Intent i;
-            i = new Intent(this, MainActivity.class);
+            i = new Intent(this, MenuActivity.class);
             startActivity(i);
     }
 

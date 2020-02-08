@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
     static String doc;
     static int button_value;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View view) {
-        Intent i = new Intent(this, Zagruzka.class);
+        Intent i = new Intent(this, LoadingActivity.class);
         //Intent intent = new Intent(this, WebActivity.class);
         //Intent intent_2 = new Intent(this, DescriptionActivity.class);
         button_value = view.getId();

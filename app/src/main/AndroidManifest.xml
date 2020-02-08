@@ -14,10 +14,10 @@ package="com.example.registration">
     android:supportsRtl="true"
     android:theme="@style/Theme.AppCompat.Light.NoActionBar">
     <activity android:name=".DescriptionActivity"></activity>
-    <activity android:name=".MainActivity">
+    <activity android:name=".MenuActivity">
     </activity>
     <activity android:name=".WebActivity"></activity>
-    <activity android:name=".Zagruzka">
+    <activity android:name=".LoadingActivity">
         <intent-filter>
     <action android:name="android.intent.action.MAIN" />
 
