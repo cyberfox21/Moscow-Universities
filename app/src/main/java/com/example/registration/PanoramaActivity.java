@@ -16,18 +16,9 @@ import com.yandex.runtime.Error;
 import com.yandex.runtime.network.NetworkError;
 import com.yandex.runtime.network.RemoteError;
 
-/**
- * This example shows how to find a panorama that is nearest to a given point and display it
- * in the PanoramaView object. User is not limited to viewing the panorama found and can
- * use arrows to navigate.
- * Note: Nearest panorama search API calls count towards MapKit daily usage limits.
- * Learn more at https://tech.yandex.ru/mapkit/doc/3.x/concepts/conditions-docpage/#conditions__limits
- */
+
 public class PanoramaActivity extends Activity implements PanoramaService.SearchListener {
-    /**
-     * Replace "your_api_key" with a valid developer key.
-     * You can get it at the https://developer.tech.yandex.ru/ website.
-     */
+
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private final Point SEARCH_LOCATION = new Point( 55.929729,  37.520809);
 
@@ -40,7 +31,7 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
         PlacesFactory.initialize(this);
-        setContentView(R.layout.panorama);
+        setContentView(R.layout.activity_panorama);
         super.onCreate(savedInstanceState);
         panoramaView = (PanoramaView)findViewById(R.id.panoview);
 

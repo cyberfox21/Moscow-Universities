@@ -34,7 +34,7 @@ public class LoadingActivity extends Activity {
             welcomeThread.start();
         }
         else if(intent.hasExtra("id")) {
-            setContentView(R.layout.splash);
+            setContentView(R.layout.activity_loading);
 
 
             Thread welcomeThread = new Thread() {
