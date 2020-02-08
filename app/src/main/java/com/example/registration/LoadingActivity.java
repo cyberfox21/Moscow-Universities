@@ -50,11 +50,13 @@ public class LoadingActivity extends Activity {
                     } finally {
                         Intent intent = getIntent();
                         String doc = intent.getStringExtra("doc");
+                        String title = intent.getStringExtra("title");
                         int id = intent.getIntExtra("id", R.id.hse_button);
                         Intent i = new Intent(LoadingActivity.this,
                                 DescriptionActivity.class);
                         i.putExtra("id", id);
                         i.putExtra("doc", doc);
+                        i.putExtra("title", title);
                         startActivity(i);
                         finish();
 

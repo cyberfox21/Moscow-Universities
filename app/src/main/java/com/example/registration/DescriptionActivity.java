@@ -12,14 +12,15 @@ import android.widget.TextView;
 
 public class DescriptionActivity extends AppCompatActivity {
 
-    ImageView image;
-    TextView descriptionTextView;
-    Button hse;
-    Button mfti;
-    Button mgu;
-    Button rhtu;
-    String doc;
-    int id;
+    private ImageView image;
+    private TextView descriptionTextView;
+    private Button hse;
+    private Button mfti;
+    private Button mgu;
+    private Button rhtu;
+    private String doc;
+    private String title;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class DescriptionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("id", R.id.mfti_button);
         doc = intent.getStringExtra("doc");
+        title = intent.getStringExtra("title");
 
 
         if(id == R.id.mgu_button){
@@ -117,6 +119,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     public void showLocation(View view) {
             Intent i = new Intent(this, SearchActivity.class);
+            i.putExtra("title", title);
             startActivity(i);
     }
 }

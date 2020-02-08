@@ -23,7 +23,6 @@
             android:id="@+id/search_edit"
             android:imeOptions="actionSearch"
             android:inputType="text"
-            android:maxLines="1"
-            android:text="МФТИ"/>
+            android:maxLines="1" />
     </LinearLayout>
 </RelativeLayout>

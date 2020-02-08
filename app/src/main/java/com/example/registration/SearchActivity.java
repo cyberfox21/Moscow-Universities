@@ -1,6 +1,7 @@
 package com.example.registration;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -37,6 +38,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private MapView mapView;
     private SearchManager searchManager;
     private Session searchSession;
+    private String title;
 
     private void submitQuery(String query) {
         searchSession = searchManager.submit(
@@ -61,9 +63,15 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         mapView.getMap().addCameraListener(this);
 
         searchEdit = (EditText)findViewById(R.id.search_edit);
+
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
+        searchEdit.setText(title, TextView.BufferType.EDITABLE);
+
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                textView.setText(title);
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     submitQuery(searchEdit.getText().toString());
                 }
@@ -102,7 +110,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
             if (resultLocation != null) {
                 mapObjects.addPlacemark(
                         resultLocation,
-                        ImageProvider.fromResource(this, R.drawable.locationlogo));
+                        ImageProvider.fromResource(this, R.drawable.pointer));
             }
         }
     }

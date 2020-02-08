@@ -10,11 +10,12 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
     static String doc;
+    static String title;
     static int button_value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_menu);
 
 
 
@@ -37,17 +38,22 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         if(view.getId() == R.id.hse_button) {
             doc = "https://ba.hse.ru/minkrit2020#pagetop";
+            title = "ВШЭ";
         }
         if(view.getId() == R.id.mfti_button) {
             doc = "https://studika.ru/moskva/mfti/specialnosti";
+            title = "МФТИ";
         }
         if(view.getId() == R.id.mgu_button){
             doc = "https://postupi.info/vuz/mgu-im.-m.v.-lomonosova/spec";
+            title = "МГУ";
         }
         if(view.getId() == R.id.rhtu_button){
             doc = "https://postupi.info/vuz/rhtu-im.-d.i.mendeleeva/spec";
+            title = "РХТУ";
         }
         i.putExtra("doc", doc);
+        i.putExtra("title", title);
         i.putExtra("id", button_value);
         startActivity(i);
 
