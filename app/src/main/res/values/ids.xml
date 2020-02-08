@@ -3,4 +3,8 @@
     <item name="Stranicka" type="id"/>
     <item name="Stranicka2" type="id" />
     <item name="Stranicka3" type="id" />
+    <item name="mfti_button" type="id">mfti_button</item>
+    <item name="hse_button" type="id">hse_button</item>
+    <item name="mgu_button" type="id">mgu_button</item>
+    <item name="rhtu_button" type="id">rhtu_button</item>
 </resources>
