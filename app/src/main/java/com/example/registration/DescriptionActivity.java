@@ -24,7 +24,7 @@ public class DescriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.description);
+        setContentView(R.layout.activity_description);
 
         hse = (findViewById(R.id.hse_button));
         mfti = (findViewById(R.id.mfti_button));

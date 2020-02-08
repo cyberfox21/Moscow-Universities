@@ -14,7 +14,7 @@ public class WebActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.hse1);
+        setContentView(R.layout.activity_webView);
         WebView webView = (WebView) findViewById(R.id.Stranicka);
         WebSettings settings = webView.getSettings();
         settings.setTextZoom(x);
