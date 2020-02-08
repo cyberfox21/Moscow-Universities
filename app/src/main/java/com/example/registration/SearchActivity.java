@@ -29,16 +29,9 @@ import com.yandex.runtime.image.ImageProvider;
 import com.yandex.runtime.network.NetworkError;
 import com.yandex.runtime.network.RemoteError;
 
-/**
- * This example shows how to add and interact with a layer that displays search results on the map.
- * Note: search API calls count towards MapKit daily usage limits. Learn more at
- * https://tech.yandex.ru/mapkit/doc/3.x/concepts/conditions-docpage/#conditions__limits
- */
+
 public class SearchActivity extends Activity implements Session.SearchListener, CameraListener {
-    /**
-     * Replace "your_api_key" with a valid developer key.
-     * You can get it at the https://developer.tech.yandex.ru/ website.
-     */
+
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private EditText searchEdit;
     private MapView mapView;
