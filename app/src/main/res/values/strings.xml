@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">HSE</string>
+    <string name="map">Map</string>/string
+    <string name="user_location">User Location</string>
+    <string name="driving">Driving</string>
+    <string name="mapobjects">Map Objects</string>
+
+    <string name="map_sublayers">Map Sublayers</string>
+    <string name="sublayer_buildings_before_mo_geometry">Render Buildings before Map Object Geometry</string>
+    <string name="sublayer_buildings_after_mo_geometry">Render Buildings after Map Object Geometry</string>
+
+    <string name="search">Search</string>
+    <string name="suggest">Suggest</string>
+    <string name="panorama">Panorama</string>
+    <string name="custom_layer">Custom Layer</string>
+    <string name="masstransit_routing">Masstransit routing</string>
+    <string name="geo_json_test">Geo JSON</string>
+    <string name="clustering">Clustering</string>
+
+    <string name="cluster_tap_message">Tapped cluster with %d items</string>
+
+    <string name="not_found_error_message">Not found</string>
+    <string name="network_error_message">Network error</string>
+    <string name="remote_error_message">Remote server error</string>
+    <string name="unknown_error_message">Unknown error</string>
+
+    <string name="package_name">com.yandex.mapkitdemo</string>
+    <string name="hse">ВШЭ</string>
+    <string name="mfti">МФТИ</string>
+    <string name="mgu">МГУ</string>
+    <string name="rhtu">РХТУ</string>
+    <string name="text_mfti">Московский физико-технический институт — ведущий технический вуз страны, который входит в престижные рейтинги лучших университетов мира. Здесь обучают фундаментальной и прикладной физике, математике, информатике, химии, биологии, компьютерным технологиям и другим естественным и точным наукам. Сегодня Физтех - это передовой научный центр. За последние годы здесь были открыты 64 новые лаборатории, где работают ученые с мировым именем. Они занимаются проблемами старения и возрастных заболеваний, прикладной и фундаментальной физикой, нанооптикой, квантовыми вычислениями, фотоникой и многим другим</string>
+    <string name="text_hse">ВШЭ создавалась как экономический вуз, поэтому первые факультеты Вышки готовили, в основном, экономистов, менеджеров и социологов. Но современное социально-экономическое образование базируется на междисциплинарности. Не только образовательные, но и исследовательские открытия и прорывы происходят на пересечении различных дисциплин и наук. На взаимодействии экономических, инженерных и гуманитарных школ основаны модели таких всемирно известных университетов, как MIT и Caltech. По этому же пути пошла Вышка.</string>
+    <string name="text_mgu">Московский государственный университет имени М.В. Ломоносова (МГУ) – крупнейшее и, несомненно, лучшее высшее учебное заведение России, что подтверждают и последний рейтинг британского издания Times Higher Education, и глобальные исследования ряда отечественных организаций. Большая часть зданий университета располагается на Воробьевых горах, на юго-западе Москвы, образуя уникальный "студенческий город", попасть в который многие мечтают с детства. МГУ сегодня – это ведущий научно-исследовательский центр, известный не только собственными стандартами обучения, но и насыщенной культурной жизнью, особой творческой атмосферой и традициями, передающимися из поколения в поколение.</string>
+    <string name="text_rhtu">РХТУ осуществляет подготовку бакалавров и магистров, сохранив и традиционную подготовку специалистов по ряду специальностей. В последние годы встала задача обеспечения производства не только химиками-технологами, но и менеджерами, экономистами, социологами, экологами, специалистами по информационным технологиям. Университет осуществляет и такую подготовку.Образование в РХТУ им. Д.И. Менделеева – это получение фундаментальных знаний, соответствие мировым требованиям, предъявляемым к современным специалистам, умение комплексно решать поставленные задачи в системе «наука – производство – окружающая среда – развитие личности».</string>
+    <string name="balls_button">Посмотреть проходные баллы</string>
+    <string name="back_button">Вернуться</string>
+    <string name="panoram_button">Панорама</string>
+    <string name="location_button">Расположение на карте</string>
+</resources>
