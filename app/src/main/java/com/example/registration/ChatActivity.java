@@ -54,7 +54,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText textField = findViewById(R.id.messageField);
-                if(textField.getText().toString() == "")
+                if(textField.getText().toString().equals(""))
                     return;
                 FirebaseDatabase.getInstance().getReference().push().setValue(
                         new Message(
@@ -90,7 +90,6 @@ public class ChatActivity extends AppCompatActivity {
                 mess_time.setText(DateFormat.format("dd-MM-yyyy HH:mm:ss", model.getMessageTime()));
             }
         };
-
         listOfMessages.setAdapter(adapter);
     }
 }
