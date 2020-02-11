@@ -2,6 +2,7 @@ package com.example.registration;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -13,6 +14,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.registration.DrivingActivity;
+import com.example.registration.PanoramaActivity;
+import com.example.registration.R;
 import com.yandex.mapkit.GeoObjectCollection;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
@@ -45,6 +49,8 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private String title;
     private float x, y;
 
+    Context mContext;
+
     private void submitQuery(String query) {
         searchSession = searchManager.submit(
                 query,
@@ -58,6 +64,8 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
         SearchFactory.initialize(this);
+
+        mContext = this;
 
         setContentView(R.layout.search);
         super.onCreate(savedInstanceState);
@@ -86,6 +94,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
                 return false;
             }
         });
+
 
         mapView.getMap().move(
                 new CameraPosition(new Point(x, y), 14.0f, 0.0f, 0.0f));
@@ -148,6 +157,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     public void showPopupMenu(View v) {
         PopupMenu popupMenu = new PopupMenu(this, v);
         popupMenu.inflate(R.layout.button_menu);
+        mContext = this;
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
             @Override
@@ -155,19 +165,12 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
                 switch (item.getItemId()) {
 
                     case R.id.menu1:
-                        Toast.makeText(getApplicationContext(),
-                                "Вы выбрали PopupMenu 1",
-                                Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), PanoramaActivity.class);
+                        startActivity(i);
                         return true;
                     case R.id.menu2:
-                        Toast.makeText(getApplicationContext(),
-                                "Вы выбрали PopupMenu 2",
-                                Toast.LENGTH_SHORT).show();
-                        return true;
-                    case R.id.menu3:
-                        Toast.makeText(getApplicationContext(),
-                                "Вы выбрали PopupMenu 3",
-                                Toast.LENGTH_SHORT).show();
+                        Intent r = new Intent(getApplicationContext(), DrivingActivity.class);
+                        startActivity(r);
                         return true;
                     default:
                         return false;
@@ -179,10 +182,9 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
             @Override
             public void onDismiss(PopupMenu menu) {
-                Toast.makeText(getApplicationContext(), "onDismiss",
-                        Toast.LENGTH_SHORT).show();
             }
         });
+
         popupMenu.show();
     }
 }

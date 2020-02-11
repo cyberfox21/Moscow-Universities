@@ -14,9 +14,10 @@
         android:roundIcon="@mipmap/logo2"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".DrivingActivity"></activity>
+        <activity android:name=".ChatActivity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity" />
         <activity android:name=".WebActivity" />
         <activity android:name=".LoadingActivity">
             <intent-filter>

@@ -6,19 +6,9 @@
         <item
             android:id="@+id/menu1"
             android:icon="@mipmap/ic_launcher"
-            android:title="@string/build_a_route"/>
-        <item
-            android:id="@+id/menu2"
             android:title="@string/open_panorama"/>
         <item
-            android:id="@+id/menu3"
-            android:visibility="visible"
-            android:title="@string/choose_building">
-            <menu>
-                <item
-                    android:id="@+id/submenu"
-                    android:title="Корпус_1"/>
-            </menu>
-        </item>
+            android:id="@+id/menu2"
+            android:title="@string/build_a_route"/>
     </group>
 </menu>
