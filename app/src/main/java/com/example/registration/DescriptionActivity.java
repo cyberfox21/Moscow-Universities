@@ -135,5 +135,7 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     public void openChat(View view) {
+        Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
     }
 }

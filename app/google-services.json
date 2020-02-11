@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1022446410509",
+    "firebase_url": "https://moscowuniversities.firebaseio.com",
+    "project_id": "moscowuniversities",
+    "storage_bucket": "moscowuniversities.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022446410509:android:edbe1404edd2a51771ae44",
+        "android_client_info": {
+          "package_name": "com.example.registration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022446410509-phan58visb88ig0l0k6uggqj9t4v71co.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.registration",
+            "certificate_hash": "690164fe017172dcae396efcc34ed08ad3d0ced2"
+          }
+        },
+        {
+          "client_id": "1022446410509-ac96jtajjvjqk09mh8be9v764j1n3lb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6REVDQ39l9ZAVpu0OW4xeAyBeHnPsgYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022446410509-ac96jtajjvjqk09mh8be9v764j1n3lb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

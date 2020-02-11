@@ -42,5 +42,6 @@
     <string name="open_panorama">Перейти на панорамный вид</string>
     <string name="choose_building">Выбрать корпус университа</string>
     <string name="open_chat">Открыть чат</string>
+    <string name="input">Введите сообщение...</string>
 
 </resources>
