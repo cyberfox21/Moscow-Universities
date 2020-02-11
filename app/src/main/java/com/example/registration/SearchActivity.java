@@ -1,11 +1,15 @@
 package com.example.registration;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,7 +70,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
-        searchEdit.setText(title, TextView.BufferType.EDITABLE);
+        searchEdit.setText(title);
 
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -136,5 +140,49 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         if (finished) {
             submitQuery(searchEdit.getText().toString());
         }
+    }
+    @SuppressLint("ResourceType")
+    public void showPopupMenu(View v) {
+        PopupMenu popupMenu = new PopupMenu(this, v);
+        //получаем всплывающее меня из xml файла
+        popupMenu.inflate(R.layout.button_menu);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+
+                    case R.id.menu1:
+                        Toast.makeText(getApplicationContext(),
+                                "Вы выбрали PopupMenu 1",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.menu2:
+                        Toast.makeText(getApplicationContext(),
+                                "Вы выбрали PopupMenu 2",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.menu3:
+                        Toast.makeText(getApplicationContext(),
+                                "Вы выбрали PopupMenu 3",
+                                Toast.LENGTH_SHORT).show();
+                        return true;
+                    default:
+                        return false;
+
+
+                }
+            }
+        });
+
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                Toast.makeText(getApplicationContext(), "onDismiss",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+        popupMenu.show();
     }
 }

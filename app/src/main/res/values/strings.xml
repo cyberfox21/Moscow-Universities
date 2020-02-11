@@ -37,4 +37,9 @@
     <string name="back_button">Вернуться</string>
     <string name="panoram_button">Панорама</string>
     <string name="location_button">Расположение на карте</string>
+    <string name="buildings">Корпуса</string>
+    <string name="build_a_route">Построить маршрут</string>
+    <string name="open_panorama">Перейти на панорамный вид</string>
+    <string name="choose_building">Выбрать корпус университа</string>
+
 </resources>

@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/hseegcrollup13" />
+                    app:srcCompat="@drawable/hse" />
 
                 <Button
                     android:id="@+id/hse_button"
@@ -85,7 +85,7 @@
                 android:orientation="horizontal">
                 <!--        android:layout_weight="1">-->
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/mgu" />
