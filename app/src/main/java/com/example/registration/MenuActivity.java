@@ -11,16 +11,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     static String doc;
     static String title;
+    static float x, y;
     static int button_value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-
-
-
-
 
         Button hse2 = (findViewById(R.id.hse_button));
         hse2.setOnClickListener(this);
@@ -39,22 +35,33 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         if(view.getId() == R.id.hse_button) {
             doc = "https://ba.hse.ru/minkrit2020#pagetop";
             title = "ВШЭ";
+            x = (float)55.761504;
+            y = (float)37.632893;
+
         }
         if(view.getId() == R.id.mfti_button) {
             doc = "https://studika.ru/moskva/mfti/specialnosti";
             title = "МФТИ";
+            x = (float)55.929729;
+            y = (float)37.520809;
         }
         if(view.getId() == R.id.mgu_button){
             doc = "https://postupi.info/vuz/mgu-im.-m.v.-lomonosova/spec";
             title = "МГУ";
+            x = (float)55.701964;
+            y = (float)37.529700;
         }
         if(view.getId() == R.id.rhtu_button){
             doc = "https://postupi.info/vuz/rhtu-im.-d.i.mendeleeva/spec";
             title = "РХТУ";
+            x = (float)55.857471;
+            y = (float)37.417657;
         }
         i.putExtra("doc", doc);
         i.putExtra("title", title);
         i.putExtra("id", button_value);
+        i.putExtra("x", x);
+        i.putExtra("y", y);
         startActivity(i);
 
     }

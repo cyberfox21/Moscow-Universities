@@ -43,6 +43,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private SearchManager searchManager;
     private Session searchSession;
     private String title;
+    private float x, y;
 
     private void submitQuery(String query) {
         searchSession = searchManager.submit(
@@ -70,6 +71,8 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
         Intent intent = getIntent();
         title = intent.getStringExtra("title");
+        x = intent.getFloatExtra("x", (float) 55.929729);
+        y = intent.getFloatExtra("y", (float) 37.520809);
         searchEdit.setText(title);
 
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -85,7 +88,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         });
 
         mapView.getMap().move(
-                new CameraPosition(new Point(55.929878, 37.520029), 14.0f, 0.0f, 0.0f));
+                new CameraPosition(new Point(x, y), 14.0f, 0.0f, 0.0f));
 
         submitQuery(searchEdit.getText().toString());
     }
@@ -144,7 +147,6 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     @SuppressLint("ResourceType")
     public void showPopupMenu(View v) {
         PopupMenu popupMenu = new PopupMenu(this, v);
-        //получаем всплывающее меня из xml файла
         popupMenu.inflate(R.layout.button_menu);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
@@ -169,8 +171,6 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
                         return true;
                     default:
                         return false;
-
-
                 }
             }
         });

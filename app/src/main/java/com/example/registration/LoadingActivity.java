@@ -51,12 +51,16 @@ public class LoadingActivity extends Activity {
                         Intent intent = getIntent();
                         String doc = intent.getStringExtra("doc");
                         String title = intent.getStringExtra("title");
+                        float x = intent.getFloatExtra("x", (float) 55.929729);
+                        float y = intent.getFloatExtra("y", (float) 37.520809);
                         int id = intent.getIntExtra("id", R.id.hse_button);
                         Intent i = new Intent(LoadingActivity.this,
                                 DescriptionActivity.class);
                         i.putExtra("id", id);
                         i.putExtra("doc", doc);
                         i.putExtra("title", title);
+                        i.putExtra("x", x);
+                        i.putExtra("y", y);
                         startActivity(i);
                         finish();
 

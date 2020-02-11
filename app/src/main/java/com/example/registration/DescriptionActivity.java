@@ -73,6 +73,10 @@ public class DescriptionActivity extends AppCompatActivity {
         }
         else if(view.getId() == R.id.panorama ){
             Intent i = new Intent(this, PanoramaActivity.class);
+            float x = intent.getFloatExtra("x", (float) 55.929729);
+            float y = intent.getFloatExtra("y", (float) 37.520809);
+            i.putExtra("x", x);
+            i.putExtra("y", y);
             startActivity(i);
         }
         else if(view.getId() == R.id.back ){
@@ -118,8 +122,13 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     public void showLocation(View view) {
+            Intent intent = getIntent();
+            float x = intent.getFloatExtra("x", (float) 55.929729);
+            float y = intent.getFloatExtra("y", (float) 37.520809);
             Intent i = new Intent(this, SearchActivity.class);
             i.putExtra("title", title);
+            i.putExtra("x", x);
+            i.putExtra("y", y);
             startActivity(i);
     }
 }

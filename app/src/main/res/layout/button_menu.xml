@@ -12,7 +12,7 @@
             android:title="@string/open_panorama"/>
         <item
             android:id="@+id/menu3"
-            android:visibility="VISIBLE"
+            android:visibility="visible"
             android:title="@string/choose_building">
             <menu>
                 <item

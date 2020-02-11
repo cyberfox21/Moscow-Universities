@@ -1,6 +1,7 @@
 package com.example.registration;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -20,14 +21,18 @@ import com.yandex.runtime.network.RemoteError;
 public class PanoramaActivity extends Activity implements PanoramaService.SearchListener {
 
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
-    private final Point SEARCH_LOCATION = new Point( 55.929729,  37.520809);
-
+    private Point SEARCH_LOCATION;
     private PanoramaView panoramaView;
     private PanoramaService panoramaService;
     private PanoramaService.SearchSession searchSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        float x, y;
+        x = intent.getFloatExtra("x", (float) 55.929729);
+        y = intent.getFloatExtra("y", (float) 37.520809);
+        SEARCH_LOCATION = new Point( x, y);
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
         PlacesFactory.initialize(this);
