@@ -9,13 +9,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="horizontal"
+            android:background="@drawable/style_4">
+
+            <TextView
+                android:id="@+id/textViewUniversityTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:textColor="@color/white">
+            </TextView>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/style_2"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:onClick="openChat"
+                android:text="@string/open_chat"
+                android:textColor="@color/logo"
+                android:textSize="10sp"></Button>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/image_d"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <ScrollView
@@ -36,8 +68,8 @@
                 android:layout_weight="4"
                 android:padding="10dp"
                 android:gravity="start"
-                android:textColor="@color/discrition_text"
-                android:textSize="25sp" />
+                android:textColor="@color/logo"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
 
@@ -46,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:layout_weight="3.5"
+        android:layout_weight="2.5"
         android:orientation="horizontal">
 
         <LinearLayout

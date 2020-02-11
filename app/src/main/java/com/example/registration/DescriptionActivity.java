@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class DescriptionActivity extends AppCompatActivity {
 
     private ImageView image;
-    private TextView descriptionTextView;
+    private TextView descriptionTextView, textViewUniversityTitle;
     private Button hse;
     private Button mfti;
     private Button mgu;
@@ -35,6 +35,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
         image = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
+        textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
 
         String description = getString(R.string.text_mgu);
 
@@ -61,6 +62,7 @@ public class DescriptionActivity extends AppCompatActivity {
             image.setImageResource(R.drawable.rhtu_image);
         }
         descriptionTextView.setText(description);
+        textViewUniversityTitle.setText(title);
     }
     public void onClick(View view){
         Intent intent = getIntent();
@@ -130,5 +132,8 @@ public class DescriptionActivity extends AppCompatActivity {
             i.putExtra("x", x);
             i.putExtra("y", y);
             startActivity(i);
+    }
+
+    public void openChat(View view) {
     }
 }
