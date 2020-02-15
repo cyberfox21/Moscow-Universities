@@ -43,5 +43,6 @@
     <string name="choose_building">Выбрать корпус университа</string>
     <string name="open_chat">Открыть чат</string>
     <string name="input">Введите сообщение...</string>
+    <string name="developed_by_tsib">Developed by TSIB</string>
 
 </resources>

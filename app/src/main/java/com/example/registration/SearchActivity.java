@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -13,6 +14,8 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.registration.DrivingActivity;
 import com.example.registration.PanoramaActivity;
@@ -39,6 +42,7 @@ import com.yandex.runtime.network.NetworkError;
 import com.yandex.runtime.network.RemoteError;
 
 
+
 public class SearchActivity extends Activity implements Session.SearchListener, CameraListener {
 
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
@@ -47,6 +51,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private SearchManager searchManager;
     private Session searchSession;
     private String title;
+    Point resultLocation;
     private float x, y;
 
     Context mContext;
@@ -86,7 +91,6 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                textView.setText(title);
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     submitQuery(searchEdit.getText().toString());
                 }
@@ -122,7 +126,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
         mapObjects.clear();
 
         for (GeoObjectCollection.Item searchResult : response.getCollection().getChildren()) {
-            Point resultLocation = searchResult.getObj().getGeometry().get(0).getPoint();
+            resultLocation = searchResult.getObj().getGeometry().get(0).getPoint();
             if (resultLocation != null) {
                 mapObjects.addPlacemark(
                         resultLocation,
@@ -153,38 +157,20 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
             submitQuery(searchEdit.getText().toString());
         }
     }
-    @SuppressLint("ResourceType")
-    public void showPopupMenu(View v) {
-        PopupMenu popupMenu = new PopupMenu(this, v);
-        popupMenu.inflate(R.layout.button_menu);
-        mContext = this;
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
+    public void openPanorama(View view) {
+        Intent i = new Intent(getApplicationContext(), PanoramaActivity.class);
+        i.putExtra("x", x);
+        i.putExtra("y", y);
+        startActivity(i);
+    }
 
-                    case R.id.menu1:
-                        Intent i = new Intent(getApplicationContext(), PanoramaActivity.class);
-                        startActivity(i);
-                        return true;
-                    case R.id.menu2:
-                        Intent r = new Intent(getApplicationContext(), DrivingActivity.class);
-                        startActivity(r);
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-
-        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
-
-            @Override
-            public void onDismiss(PopupMenu menu) {
-            }
-        });
-
-        popupMenu.show();
+    public void buildRoute(View view) {
+        Intent r = new Intent(getApplicationContext(), DrivingActivity.class);
+        r.putExtra("x", x);
+        r.putExtra("y", y);
+        r.putExtra("resultX", resultLocation.getLatitude());
+        r.putExtra("resultY", resultLocation.getLongitude());
+        startActivity(r);
     }
 }

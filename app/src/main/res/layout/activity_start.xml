@@ -22,7 +22,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by TSIB"
+        android:text="@string/developed_by_tsib"
         android:textStyle="bold"
         android:gravity="center"
         android:textColor="@color/logo"
