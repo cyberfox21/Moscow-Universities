@@ -27,6 +27,8 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseListAdapter<Message> adapter;
     private FloatingActionButton sendButton;
 
+    private String title;
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -49,6 +51,8 @@ public class ChatActivity extends AppCompatActivity {
 
         activity_main = findViewById(R.id.activity_main);
         sendButton = findViewById(R.id.btnSend);
+        Intent i = getIntent();
+        title =  i.getStringExtra("title");
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
                 EditText textField = findViewById(R.id.messageField);
                 if(textField.getText().toString().equals(""))
                     return;
-                FirebaseDatabase.getInstance().getReference().push().setValue(
+                FirebaseDatabase.getInstance().getReference().child(title).push().setValue(
                         new Message(
                                 FirebaseAuth.getInstance().getCurrentUser().getEmail(),
                                 textField.getText().toString()
@@ -76,18 +80,18 @@ public class ChatActivity extends AppCompatActivity {
 
     private void displayAllMassages() {
         ListView listOfMessages = findViewById(R.id.list_of_messages);
-        adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.list_item, FirebaseDatabase.getInstance().getReference()) {
+        adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.list_item, FirebaseDatabase.getInstance().getReference().child(title)) {
             @Override
-            protected void populateView(View v, Message model, int position) {
+            protected void populateView(View v, Message message, int position) {
                 TextView mess_user, mess_time;
                 BubbleTextView mess_text;
                 mess_user = v.findViewById(R.id.message_user);
                 mess_time = v.findViewById(R.id.message_time);
                 mess_text = v.findViewById(R.id.message_text);
 
-                mess_text.setText(model.getUserName());
-                mess_user.setText(model.getTextMessage());
-                mess_time.setText(DateFormat.format("dd-MM-yyyy HH:mm:ss", model.getMessageTime()));
+                mess_text.setText(message.getUserName());
+                mess_user.setText(message.getTextMessage());
+                mess_time.setText(DateFormat.format("dd-MM-yyyy HH:mm:ss", message.getMessageTime()));
             }
         };
         listOfMessages.setAdapter(adapter);
