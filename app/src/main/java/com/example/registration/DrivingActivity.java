@@ -25,30 +25,14 @@ import com.yandex.runtime.network.RemoteError;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This example shows how to build routes between two points and display them on the map.
- * Note: Routing API calls count towards MapKit daily usage limits. Learn more at
- *
- *
- *
- *
- * https://tech.yandex.ru/mapkit/doc/3.x/concepts/conditions-docpage/#conditions__limits
- */
 public class DrivingActivity extends Activity implements DrivingSession.DrivingRouteListener {
 
     private float end_x, end_y;
     private float start_x, start_y;
 
-    /**
-     * Replace "your_api_key" with a valid developer key.
-     * You can get it at the https://developer.tech.yandex.ru/ website.
-     */
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private Point ROUTE_START_LOCATION = new Point(59.959194, 30.407094);
     private Point ROUTE_END_LOCATION = new Point(55.733330, 37.587649);
-    private  Point SCREEN_CENTER = new Point(
-            (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
-            (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
 
     private MapView mapView;
     private MapObjectCollection mapObjects;
@@ -57,9 +41,9 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent i = getIntent();
-        end_x = i.getFloatExtra("x", (float) 55.733330);
-        end_y = i.getFloatExtra("y", (float) 55.733330);
+        Intent fromDescriptionActivity = getIntent();
+        end_x = fromDescriptionActivity.getFloatExtra("x", (float) 55.733330);
+        end_y = fromDescriptionActivity.getFloatExtra("y", (float) 55.733330);
         start_x = (float)55.751853;
         start_y = (float)37.679608;
         MapKitFactory.setApiKey(MAPKIT_API_KEY);

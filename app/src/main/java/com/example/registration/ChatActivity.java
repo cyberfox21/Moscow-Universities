@@ -51,8 +51,8 @@ public class ChatActivity extends AppCompatActivity {
 
         activity_main = findViewById(R.id.activity_main);
         sendButton = findViewById(R.id.btnSend);
-        Intent i = getIntent();
-        title =  i.getStringExtra("title");
+        Intent fromDescriptionActivity = getIntent();
+        title =  fromDescriptionActivity.getStringExtra("title");
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +70,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        // Пользователь ещё не авторизован
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_CODE);
         else

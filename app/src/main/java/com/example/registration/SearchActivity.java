@@ -82,10 +82,10 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
         searchEdit = (EditText)findViewById(R.id.search_edit);
 
-        Intent intent = getIntent();
-        title = intent.getStringExtra("title");
-        x = intent.getFloatExtra("x", (float) 55.929729);
-        y = intent.getFloatExtra("y", (float) 37.520809);
+        Intent fromDescriptionActivity = getIntent();
+        title = fromDescriptionActivity.getStringExtra("title");
+        x = fromDescriptionActivity.getFloatExtra("x", (float) 55.929729);
+        y = fromDescriptionActivity.getFloatExtra("y", (float) 37.520809);
         searchEdit.setText(title);
 
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -159,18 +159,18 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     }
 
     public void openPanorama(View view) {
-        Intent i = new Intent(getApplicationContext(), PanoramaActivity.class);
-        i.putExtra("x", x);
-        i.putExtra("y", y);
-        startActivity(i);
+        Intent toPanoramaActivity = new Intent(getApplicationContext(), PanoramaActivity.class);
+        toPanoramaActivity.putExtra("x", x);
+        toPanoramaActivity.putExtra("y", y);
+        startActivity(toPanoramaActivity);
     }
 
     public void buildRoute(View view) {
-        Intent r = new Intent(getApplicationContext(), DrivingActivity.class);
-        r.putExtra("x", x);
-        r.putExtra("y", y);
-        r.putExtra("resultX", resultLocation.getLatitude());
-        r.putExtra("resultY", resultLocation.getLongitude());
-        startActivity(r);
+        Intent toDrivingActivity = new Intent(getApplicationContext(), DrivingActivity.class);
+        toDrivingActivity.putExtra("x", x);
+        toDrivingActivity.putExtra("y", y);
+        toDrivingActivity.putExtra("resultX", resultLocation.getLatitude());
+        toDrivingActivity.putExtra("resultY", resultLocation.getLongitude());
+        startActivity(toDrivingActivity);
     }
 }

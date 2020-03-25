@@ -14,78 +14,68 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private ImageView image;
     private TextView descriptionTextView, textViewUniversityTitle;
-    private Button hse;
-    private Button mfti;
-    private Button mgu;
-    private Button rhtu;
-    private String doc;
-    private String title;
-    private int id;
+
+    String[] titles;
+    String[] descriptions;
+    String[] sites;
+    String[] xes;
+    String[] yes;
+
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
-        hse = (findViewById(R.id.hse_button));
-        mfti = (findViewById(R.id.mfti_button));
-        mgu = (findViewById(R.id.mgu_button));
-        rhtu = (findViewById(R.id.rhtu_button));
-
-
         image = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
         textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
 
-        String description = getString(R.string.text_mgu);
 
-        Intent intent = getIntent();
-        id = intent.getIntExtra("id", R.id.mfti_button);
-        doc = intent.getStringExtra("doc");
-        title = intent.getStringExtra("title");
+        Intent fromMenuActivity = getIntent();
+        position = fromMenuActivity.getIntExtra("position", 0);
 
+        titles = getResources().getStringArray(R.array.title_logos);
+        descriptions = getResources().getStringArray(R.array.texts);
+        sites = getResources().getStringArray(R.array.sites);
+        xes = getResources().getStringArray(R.array.xes);
+        yes = getResources().getStringArray(R.array.yes);
+        int[] images = {R.drawable.hse_image, R.drawable.mfti_image, R.drawable.mgu_image, R.drawable.rhtu_image, };
 
-        if(id == R.id.mgu_button){
-            description = getString(R.string.text_mgu);
-            image.setImageResource(R.drawable.mgu_image);
-        }
-        if(id == R.id.hse_button){
-            description = getString(R.string.text_hse);
-            image.setImageResource(R.drawable.hse_image);
-        }
-        if(id == R.id.mfti_button){
-            description = getString(R.string.text_mfti);
-            image.setImageResource(R.drawable.mfti_image);
-        }
-        if(id == R.id.rhtu_button){
-            description = getString(R.string.text_rhtu);
-            image.setImageResource(R.drawable.rhtu_image);
-        }
-        descriptionTextView.setText(description);
-        textViewUniversityTitle.setText(title);
+        image.setImageResource(images[position]);
+        descriptionTextView.setText(descriptions[position]);
+        textViewUniversityTitle.setText(titles[position]);
     }
-    public void onClick(View view){
-        Intent intent = getIntent();
-        doc = intent.getStringExtra("doc");
-        if(view.getId() == R.id.balls ){
-//            Intent i = new Intent(this, WebActivity.class);
-            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(doc));
-            i.putExtra("doc", doc);
-            startActivity(Intent.createChooser(i, "Browser"));
-        }
-        else if(view.getId() == R.id.panorama ){
-            Intent i = new Intent(this, PanoramaActivity.class);
-            float x = intent.getFloatExtra("x", (float) 55.929729);
-            float y = intent.getFloatExtra("y", (float) 37.520809);
-            i.putExtra("x", x);
-            i.putExtra("y", y);
-            startActivity(i);
-        }
-        else if(view.getId() == R.id.back ){
-            Intent i = new Intent(this, MenuActivity.class);
-            startActivity(i);
-        }
 
+    public void openChat(View view) {
+        Intent toChatActivity = new Intent(this, ChatActivity.class);
+        toChatActivity.putExtra("title", titles[position]);
+        startActivity(toChatActivity);
+    }
+    public void showBalls(View view) {
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(sites[position]));
+        toBrowser.putExtra("url", sites[position]);
+        startActivity(Intent.createChooser(toBrowser, "Browser"));
+    }
+
+    public void showPanorama(View view) {
+        Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
+        toPanoramaActivity.putExtra("x", xes[position]);
+        toPanoramaActivity.putExtra("y", yes[position]);
+        startActivity(toPanoramaActivity);
+    }
+    public void showLocation(View view) {
+        Intent toSearchActivity = new Intent(this, SearchActivity.class);
+        toSearchActivity.putExtra("title", titles[position]);
+        toSearchActivity.putExtra("x", xes[position]);
+        toSearchActivity.putExtra("y", yes[position]);
+        startActivity(toSearchActivity);
+    }
+
+    public void goBack(View view) {
+        Intent toMenuActivity = new Intent(this, MenuActivity.class);
+        startActivity(toMenuActivity);
     }
 
     @Override
@@ -97,46 +87,13 @@ public class DescriptionActivity extends AppCompatActivity {
     }
 
     private void hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
-    }
-
-    // Shows the system bars by removing all the flags
-// except for the ones that make the content appear under the system bars.
-    private void showSystemUI() {
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
-
-    public void showLocation(View view) {
-            Intent intent = getIntent();
-            float x = intent.getFloatExtra("x", (float) 55.929729);
-            float y = intent.getFloatExtra("y", (float) 37.520809);
-            Intent i = new Intent(this, SearchActivity.class);
-            i.putExtra("title", title);
-            i.putExtra("x", x);
-            i.putExtra("y", y);
-            startActivity(i);
-    }
-
-    public void openChat(View view) {
-        Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("title", title);
-        startActivity(intent);
     }
 }

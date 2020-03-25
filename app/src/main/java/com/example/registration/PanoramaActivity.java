@@ -28,10 +28,10 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
+        Intent fromDescriptionActivity = getIntent();
         float x, y;
-        x = intent.getFloatExtra("x", (float) 55.929729);
-        y = intent.getFloatExtra("y", (float) 37.520809);
+        x = fromDescriptionActivity.getFloatExtra("x", (float) 55.929729);
+        y = fromDescriptionActivity.getFloatExtra("y", (float) 37.520809);
         SEARCH_LOCATION = new Point( x, y);
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
