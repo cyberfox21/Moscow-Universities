@@ -27,7 +27,7 @@ public class MenuActivity extends AppCompatActivity{
 
         String[] title_logos = getResources().getStringArray(R.array.title_logos);
         String[] description_logos = getResources().getStringArray(R.array.description_logos);
-        int[] image_logos = {R.drawable.hse, R.drawable.mfti, R.drawable.mgu, R.drawable.rhtu, };
+        int[] image_logos = {R.drawable.hse, R.drawable.mfti, R.drawable.mgu, R.drawable.rhtu, R.drawable.mpgu, R.drawable.politech, R.drawable.mirea, R.drawable.misis, R.drawable.mtusi};
 
         Card[] cards = new Card[title_logos.length];
 

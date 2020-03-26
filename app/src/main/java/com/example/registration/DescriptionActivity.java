@@ -41,7 +41,7 @@ public class DescriptionActivity extends AppCompatActivity {
         sites = getResources().getStringArray(R.array.sites);
         xes = getResources().getStringArray(R.array.xes);
         yes = getResources().getStringArray(R.array.yes);
-        int[] images = {R.drawable.hse_image, R.drawable.mfti_image, R.drawable.mgu_image, R.drawable.rhtu_image, };
+        int[] images = {R.drawable.hse_image, R.drawable.mfti_image, R.drawable.mgu_image, R.drawable.rhtu_image, R.drawable.mpgu_image, R.drawable.politech_image, R.drawable.mirea_image, R.drawable.misis_image, R.drawable.mtusi_image};
 
         image.setImageResource(images[position]);
         descriptionTextView.setText(descriptions[position]);
