@@ -182,7 +182,7 @@
             android:layout_margin="10dp"
             android:onClick="openChat"
             android:src="@drawable/fui_ic_mail_white_24dp"
-            app:backgroundTint="#000000"
+            app:backgroundTint="#0E0E0E"
             app:borderWidth="14dp"
             app:fabSize="normal"
             app:layout_constraintTop_toTopOf="parent"
@@ -197,10 +197,10 @@
             android:layout_margin="10dp"
             android:onClick="goBack"
             android:src="@drawable/logoloading"
-            app:backgroundTint="#000000"
             app:borderWidth="14dp"
             app:fabSize="normal"
             app:layout_constraintTop_toTopOf="parent"
+            app:backgroundTint="#0E0E0E"
             app:layout_constraintStart_toStartOf="parent">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
