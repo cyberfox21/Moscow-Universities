@@ -39,22 +39,22 @@
 
             <TextView
                 android:id="@+id/card_title"
-                android:layout_width="139dp"
+                android:layout_width="160dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="36dp"
-                android:layout_marginEnd="48dp"
+                android:layout_marginEnd="28dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
-                android:textSize="40dp"
+                android:textSize="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/card_descr"
-                android:layout_width="138dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="48dp"
+                android:layout_marginEnd="28dp"
                 android:gravity="center"
                 android:textColor="#F0666464"
                 android:textSize="15dp"
