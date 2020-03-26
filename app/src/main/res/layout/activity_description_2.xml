@@ -43,102 +43,111 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:layout_marginTop="10dp"
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="260dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/panorama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_7"
-            android:padding="4dp"
-            android:text="Панорама"
-            android:onClick="showPanorama"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="14dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_7"
-            android:padding="4dp"
-            android:text="Маршрут"
-            android:onClick="showRoute"
-            android:textAllCaps="false"
-            android:textColor="#ffffff" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.507">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <Button
-            android:id="@+id/balls"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_7"
-            android:onClick="showBalls"
-            android:padding="4dp"
-            android:text=" Проходной балл "
-            android:textAllCaps="false"
-            android:textColor="#ffffff" />
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/location_button"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/panorama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_7"
+                android:onClick="showPanorama"
+                android:padding="4dp"
+                android:text="Панорама"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_7"
+                android:onClick="showRoute"
+                android:padding="4dp"
+                android:text="Маршрут"
+                android:textAllCaps="false"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/style_7"
-            android:onClick="showLocation"
-            android:padding="4dp"
-            android:text="Местоположение"
-            android:textAllCaps="false"
-            android:textColor="#ffffff" />
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/balls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_7"
+                android:onClick="showBalls"
+                android:padding="4dp"
+                android:text=" Проходной балл "
+                android:textAllCaps="false"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/location_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/style_7"
+                android:onClick="showLocation"
+                android:padding="4dp"
+                android:text="Местоположение"
+                android:textAllCaps="false"
+                android:textColor="#ffffff" />
+        </LinearLayout>
     </LinearLayout>
-
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_margin="50dp"
-        android:layout_marginTop="30dp"
         android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="201dp"
+        android:layout_height="216dp"
         android:layout_weight="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.363">
+        app:layout_constraintVertical_bias="0.59">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,4 +197,3 @@
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
