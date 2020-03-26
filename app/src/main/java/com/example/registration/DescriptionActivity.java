@@ -26,7 +26,7 @@ public class DescriptionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_description);
+        setContentView(R.layout.activity_description_2);
 
         image = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
@@ -71,6 +71,12 @@ public class DescriptionActivity extends AppCompatActivity {
         toSearchActivity.putExtra("x", xes[position]);
         toSearchActivity.putExtra("y", yes[position]);
         startActivity(toSearchActivity);
+    }
+    public void showRoute(View view) {
+        Intent toDrivingActivity = new Intent(this, DrivingActivity.class);
+        toDrivingActivity.putExtra("x", xes[position]);
+        toDrivingActivity.putExtra("y", yes[position]);
+        startActivity(toDrivingActivity);
     }
 
     public void goBack(View view) {
