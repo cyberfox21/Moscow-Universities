@@ -60,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
                 EditText textField = findViewById(R.id.messageField);
                 if(textField.getText().toString().equals(""))
                     return;
-                FirebaseDatabase.getInstance().getReference().child(title).push().setValue(
+                FirebaseDatabase.getInstance().getReference().child("Messages").child(title).push().setValue(
                         new Message(
                                 FirebaseAuth.getInstance().getCurrentUser().getEmail(),
                                 textField.getText().toString()
@@ -79,7 +79,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private void displayAllMassages() {
         ListView listOfMessages = findViewById(R.id.list_of_messages);
-        adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.list_item, FirebaseDatabase.getInstance().getReference().child(title)) {
+        adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.list_item, FirebaseDatabase.getInstance().getReference().child("Messages").child(title)) {
             @Override
             protected void populateView(View v, Message message, int position) {
                 TextView mess_user, mess_time;
