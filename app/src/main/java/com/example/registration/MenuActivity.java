@@ -1,5 +1,6 @@
 package com.example.registration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,10 +13,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MenuActivity extends AppCompatActivity{
+
+    private FirebaseListAdapter<Card> adapter;
+    private Intent toDescriptionActivity;
+
+    private String title;
+    private String descr;
+    private String image;
+    private String site;
+    private Double x;
+    private Double y;
+
 
     private ListView listOfCards;
     @Override
@@ -23,29 +48,54 @@ public class MenuActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-
-
-        String[] title_logos = getResources().getStringArray(R.array.title_logos);
-        String[] description_logos = getResources().getStringArray(R.array.description_logos);
-        int[] image_logos = {R.drawable.hse, R.drawable.mfti, R.drawable.mgu, R.drawable.rhtu, R.drawable.mpgu, R.drawable.politech, R.drawable.mirea, R.drawable.misis, R.drawable.mtusi};
-
-        Card[] cards = new Card[title_logos.length];
-
-        for(int i = 0; i < title_logos.length; i++){
-            cards[i] = new Card(title_logos[i], description_logos[i], image_logos[i]);
-        }
-
         listOfCards = (ListView) findViewById(R.id.list_of_cards);
 
-        listOfCards.setAdapter(new CardAdapter(this, R.layout.card, cards));
-        final Intent toDescriptionActivity = new Intent(this, DescriptionActivity.class);
+
+        toDescriptionActivity = new Intent(this, DescriptionActivity.class);
         listOfCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                toDescriptionActivity.putExtra("position", position);
+                //toDescriptionActivity.putExtra("title", title);
+                //toDescriptionActivity.putExtra("descr", descr);
+                //toDescriptionActivity.putExtra("image", image);
+                //toDescriptionActivity.putExtra("x", x);
+                //toDescriptionActivity.putExtra("y", y);
                 startActivity(toDescriptionActivity);
             }
         });
+
+
+        displayAllCards();
+    }
+
+    private void displayAllCards() {
+        ListView listOfCards = findViewById(R.id.list_of_cards);
+
+
+        adapter = new FirebaseListAdapter<Card>(this, Card.class, R.layout.card, FirebaseDatabase.getInstance().getReference().child("Universities")) {
+            @Override
+            protected void populateView(View v, Card model, int position) {
+                TextView card_title, card_descr;
+                ImageView card_image;
+
+                card_title = v.findViewById(R.id.card_title);
+                card_descr = v.findViewById(R.id.card_descr);
+                card_image = v.findViewById(R.id.card_image);
+
+                card_title.setText(model.getTitle());
+                card_descr.setText(model.getTitle_descr());
+
+                Picasso.with(MenuActivity.this).load(model.getLogo()).into(card_image);
+
+                title = model.getTitle();
+                descr = model.getDescr();
+                image = model.getImage();
+                site = model.getSite();
+                x = model.getX();
+                y = model.getY();
+            }
+        };
+        listOfCards.setAdapter(adapter);
     }
 
     @Override

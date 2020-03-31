@@ -1,5 +1,6 @@
 package com.example.registration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,72 +11,81 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DescriptionActivity extends AppCompatActivity {
 
-    private ImageView image;
+    private ImageView imageview;
     private TextView descriptionTextView, textViewUniversityTitle;
 
-    String[] titles;
-    String[] descriptions;
-    String[] sites;
-    String[] xes;
-    String[] yes;
-
-    private int position;
+    String title;
+    String descr;
+    String site;
+    String image;
+    Double x;
+    Double y;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description_2);
 
-        image = findViewById(R.id.image_d);
+        imageview = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
         textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
 
 
         Intent fromMenuActivity = getIntent();
-        position = fromMenuActivity.getIntExtra("position", 0);
+        title = fromMenuActivity.getStringExtra("title");
+        descr = fromMenuActivity.getStringExtra("descr");
+        image = fromMenuActivity.getStringExtra("image");
+        site = fromMenuActivity.getStringExtra("site");
+        //x = fromMenuActivity.getDoubleExtra("x", 0);
+        //y = fromMenuActivity.getDoubleExtra("y", 0);
 
-        titles = getResources().getStringArray(R.array.title_logos);
-        descriptions = getResources().getStringArray(R.array.texts);
-        sites = getResources().getStringArray(R.array.sites);
-        xes = getResources().getStringArray(R.array.xes);
-        yes = getResources().getStringArray(R.array.yes);
-        int[] images = {R.drawable.hse_image, R.drawable.mfti_image, R.drawable.mgu_image, R.drawable.rhtu_image, R.drawable.mpgu_image, R.drawable.politech_image, R.drawable.mirea_image, R.drawable.misis_image, R.drawable.mtusi_image};
 
-        image.setImageResource(images[position]);
-        descriptionTextView.setText(descriptions[position]);
-        textViewUniversityTitle.setText(titles[position]);
+            Picasso.with(DescriptionActivity.this).load(image).into(imageview);
+            descriptionTextView.setText(descr);
+            textViewUniversityTitle.setText(title);
+
     }
 
     public void openChat(View view) {
         Intent toChatActivity = new Intent(this, ChatActivity.class);
-        toChatActivity.putExtra("title", titles[position]);
+        toChatActivity.putExtra("title", title);
         startActivity(toChatActivity);
     }
     public void showBalls(View view) {
-        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(sites[position]));
-        toBrowser.putExtra("url", sites[position]);
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
+        toBrowser.putExtra("url", site);
         startActivity(Intent.createChooser(toBrowser, "Browser"));
     }
 
     public void showPanorama(View view) {
         Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
-        toPanoramaActivity.putExtra("x", xes[position]);
-        toPanoramaActivity.putExtra("y", yes[position]);
+        toPanoramaActivity.putExtra("x", x);
+        toPanoramaActivity.putExtra("y", y);
         startActivity(toPanoramaActivity);
     }
     public void showLocation(View view) {
         Intent toSearchActivity = new Intent(this, SearchActivity.class);
-        toSearchActivity.putExtra("title", titles[position]);
-        toSearchActivity.putExtra("x", xes[position]);
-        toSearchActivity.putExtra("y", yes[position]);
+        toSearchActivity.putExtra("title", title);
+        toSearchActivity.putExtra("x", x);
+        toSearchActivity.putExtra("y", y);
         startActivity(toSearchActivity);
     }
     public void showRoute(View view) {
         Intent toDrivingActivity = new Intent(this, DrivingActivity.class);
-        toDrivingActivity.putExtra("x", xes[position]);
-        toDrivingActivity.putExtra("y", yes[position]);
+        toDrivingActivity.putExtra("x", x);
+        toDrivingActivity.putExtra("y", y);
         startActivity(toDrivingActivity);
     }
 
@@ -91,7 +101,6 @@ public class DescriptionActivity extends AppCompatActivity {
             hideSystemUI();
         }
     }
-
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(

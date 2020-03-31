@@ -29,7 +29,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="70dp"
                 android:gravity="center_horizontal"
-                android:text="Высшая школа экономики"
                 android:textColor="#ffffff"
                 android:textSize="25dp" />
 
@@ -42,8 +41,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="10dp"
-                android:src="@drawable/hse_image" />
+                android:layout_marginBottom="10dp"/>
 
         </LinearLayout>
 
@@ -73,7 +71,7 @@
                     android:background="@drawable/style_7"
                     android:onClick="showPanorama"
                     android:padding="4dp"
-                    android:text="Панорама"
+                    android:text="@string/panorama"
                     android:textAllCaps="false"
                     android:textColor="#ffffff"
                     android:textSize="14dp" />
@@ -88,7 +86,7 @@
                     android:background="@drawable/style_7"
                     android:onClick="showRoute"
                     android:padding="4dp"
-                    android:text="Маршрут"
+                    android:text="@string/build_a_route"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
             </LinearLayout>
@@ -114,7 +112,7 @@
                     android:background="@drawable/style_7"
                     android:onClick="showBalls"
                     android:padding="4dp"
-                    android:text="Проходной балл"
+                    android:text="@string/balls_button"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
 
@@ -128,7 +126,7 @@
                     android:background="@drawable/style_7"
                     android:onClick="showLocation"
                     android:padding="4dp"
-                    android:text=" Расположение "
+                    android:text="@string/location_button"
                     android:textAllCaps="false"
                     android:textColor="#ffffff" />
             </LinearLayout>
