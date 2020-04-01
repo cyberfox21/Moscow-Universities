@@ -1,25 +1,15 @@
 package com.example.registration;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
-import com.example.registration.DrivingActivity;
-import com.example.registration.PanoramaActivity;
-import com.example.registration.R;
 import com.yandex.mapkit.GeoObjectCollection;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
@@ -41,8 +31,6 @@ import com.yandex.runtime.image.ImageProvider;
 import com.yandex.runtime.network.NetworkError;
 import com.yandex.runtime.network.RemoteError;
 
-
-
 public class SearchActivity extends Activity implements Session.SearchListener, CameraListener {
 
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
@@ -51,18 +39,10 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private SearchManager searchManager;
     private Session searchSession;
     private String title;
-    Point resultLocation;
+    private Point resultLocation;
     private Double x, y;
 
-    Context mContext;
-
-    private void submitQuery(String query) {
-        searchSession = searchManager.submit(
-                query,
-                VisibleRegionUtils.toPolygon(mapView.getMap().getVisibleRegion()),
-                new SearchOptions(),
-                this);
-    }
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,32 +74,33 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     submitQuery(searchEdit.getText().toString());
                 }
-
                 return false;
             }
         });
-
-
         mapView.getMap().move(
                 new CameraPosition(new Point(x, y), 14.0f, 0.0f, 0.0f));
 
         submitQuery(searchEdit.getText().toString());
     }
-
+    private void submitQuery(String query) {
+        searchSession = searchManager.submit(
+                query,
+                VisibleRegionUtils.toPolygon(mapView.getMap().getVisibleRegion()),
+                new SearchOptions(),
+                this);
+    }
     @Override
     protected void onStop() {
         mapView.onStop();
         MapKitFactory.getInstance().onStop();
         super.onStop();
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         MapKitFactory.getInstance().onStart();
         mapView.onStart();
     }
-
     @Override
     public void onSearchResponse(Response response) {
         MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
@@ -134,7 +115,6 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
             }
         }
     }
-
     @Override
     public void onSearchError(Error error) {
         String errorMessage = getString(R.string.unknown_error_message);
@@ -146,7 +126,6 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
-
     @Override
     public void onCameraPositionChanged(
             Map map,
@@ -157,14 +136,12 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
             submitQuery(searchEdit.getText().toString());
         }
     }
-
     public void openPanorama(View view) {
         Intent toPanoramaActivity = new Intent(getApplicationContext(), PanoramaActivity.class);
         toPanoramaActivity.putExtra("x", x);
         toPanoramaActivity.putExtra("y", y);
         startActivity(toPanoramaActivity);
     }
-
     public void buildRoute(View view) {
         Intent toDrivingActivity = new Intent(getApplicationContext(), DrivingActivity.class);
         toDrivingActivity.putExtra("x", x);

@@ -77,7 +77,6 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
         } else if (error instanceof NetworkError) {
             errorMessage = getString(R.string.network_error_message);
         }
-
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
 

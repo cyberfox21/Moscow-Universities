@@ -51,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
 
         activity_main = findViewById(R.id.activity_main);
         sendButton = findViewById(R.id.btnSend);
+
         Intent fromDescriptionActivity = getIntent();
         title =  fromDescriptionActivity.getStringExtra("title");
 
@@ -76,7 +77,6 @@ public class ChatActivity extends AppCompatActivity {
             Snackbar.make(activity_main, "Вы авторизованы!", Snackbar.LENGTH_LONG).show();
         displayAllMassages();
     }
-
     private void displayAllMassages() {
         ListView listOfMessages = findViewById(R.id.list_of_messages);
         adapter = new FirebaseListAdapter<Message>(this, Message.class, R.layout.list_item, FirebaseDatabase.getInstance().getReference().child("Messages").child(title)) {

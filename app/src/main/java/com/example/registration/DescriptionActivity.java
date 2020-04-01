@@ -1,27 +1,13 @@
 package com.example.registration;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class DescriptionActivity extends AppCompatActivity {
 
     private ImageView imageview;
@@ -43,7 +29,6 @@ public class DescriptionActivity extends AppCompatActivity {
         descriptionTextView = findViewById(R.id.text_d);
         textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
 
-
         Intent fromMenuActivity = getIntent();
         title = fromMenuActivity.getStringExtra("title");
         descr = fromMenuActivity.getStringExtra("descr");
@@ -52,13 +37,10 @@ public class DescriptionActivity extends AppCompatActivity {
         x = fromMenuActivity.getDoubleExtra("x", 0);
         y = fromMenuActivity.getDoubleExtra("y", 0);
 
-
-            Picasso.with(DescriptionActivity.this).load(image).into(imageview);
-            descriptionTextView.setText(descr);
-            textViewUniversityTitle.setText(title);
-
+        Picasso.with(DescriptionActivity.this).load(image).into(imageview);
+        descriptionTextView.setText(descr);
+        textViewUniversityTitle.setText(title);
     }
-
     public void openChat(View view) {
         Intent toChatActivity = new Intent(this, ChatActivity.class);
         toChatActivity.putExtra("title", title);
@@ -67,19 +49,8 @@ public class DescriptionActivity extends AppCompatActivity {
     public void showBalls(View view) {
         Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
         toBrowser.putExtra("url", site);
-
-        //String url = "http://www.stackoverflow.com";
-
-
-        //Intent toBrowser = new Intent(Intent.ACTION_VIEW);
-        //toBrowser.setData(Uri.parse(site));
-        //startActivity(toBrowser);
-
         startActivity(Intent.createChooser(toBrowser, "Browser"));
-
-        //Toast.makeText(this, "URL: " + site, Toast.LENGTH_LONG).show();
     }
-
     public void showPanorama(View view) {
         Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
         toPanoramaActivity.putExtra("x", x);
@@ -99,12 +70,10 @@ public class DescriptionActivity extends AppCompatActivity {
         toDrivingActivity.putExtra("y", y);
         startActivity(toDrivingActivity);
     }
-
     public void goBack(View view) {
         Intent toMenuActivity = new Intent(this, MenuActivity.class);
         startActivity(toMenuActivity);
     }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

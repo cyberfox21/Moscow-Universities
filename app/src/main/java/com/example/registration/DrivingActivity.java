@@ -44,12 +44,11 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
         Intent fromDescriptionActivity = getIntent();
         end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
         end_y = fromDescriptionActivity.getDoubleExtra("y", (Double) 55.733330);
-        start_x = (Double)55.751853;
-        start_y = (Double)37.679608;
+        start_x = 55.751853;
+        start_y = 37.679608;
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
         DirectionsFactory.initialize(this);
-
         ROUTE_START_LOCATION = new Point(start_x, start_y);
         ROUTE_END_LOCATION = new Point(end_x, end_y);
 
@@ -61,7 +60,7 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
         setContentView(R.layout.activity_driving);
         super.onCreate(savedInstanceState);
 
-        mapView = (MapView)findViewById(R.id.mapview);
+        mapView = findViewById(R.id.mapview);
         mapView.getMap().move(new CameraPosition(
                 SCREEN_CENTER, 12, 0, 0));
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter();
@@ -69,28 +68,24 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
 
         submitRequest();
     }
-
     @Override
     protected void onStop() {
         mapView.onStop();
         MapKitFactory.getInstance().onStop();
         super.onStop();
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         MapKitFactory.getInstance().onStart();
         mapView.onStart();
     }
-
     @Override
     public void onDrivingRoutes(List<DrivingRoute> routes) {
         for (DrivingRoute route : routes) {
             mapObjects.addPolyline(route.getGeometry());
         }
     }
-
     @Override
     public void onDrivingRoutesError(Error error) {
         String errorMessage = getString(R.string.unknown_error_message);
@@ -99,10 +94,8 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
         } else if (error instanceof NetworkError) {
             errorMessage = getString(R.string.network_error_message);
         }
-
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
-
     private void submitRequest() {
         DrivingOptions options = new DrivingOptions();
         ArrayList<RequestPoint> requestPoints = new ArrayList<>();

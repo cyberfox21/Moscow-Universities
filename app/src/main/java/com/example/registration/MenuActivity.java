@@ -1,33 +1,16 @@
 package com.example.registration;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MenuActivity extends AppCompatActivity{
 
@@ -47,8 +30,7 @@ public class MenuActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        listOfCards = (ListView) findViewById(R.id.list_of_cards);
-
+        listOfCards = findViewById(R.id.list_of_cards);
 
         toDescriptionActivity = new Intent(this, DescriptionActivity.class);
         listOfCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,15 +52,14 @@ public class MenuActivity extends AppCompatActivity{
                 startActivity(toDescriptionActivity);
             }
         });
-
         displayAllCards();
     }
 
     private void displayAllCards() {
         ListView listOfCards = findViewById(R.id.list_of_cards);
 
-
-        adapter = new FirebaseListAdapter<Card>(this, Card.class, R.layout.card, FirebaseDatabase.getInstance().getReference().child("Universities")) {
+        adapter = new FirebaseListAdapter<Card>(this, Card.class, R.layout.card,
+                FirebaseDatabase.getInstance().getReference().child("Universities")) {
             @Override
             protected void populateView(View v, Card model, int position) {
                 TextView vis_title, vis_descr;
@@ -103,17 +84,13 @@ public class MenuActivity extends AppCompatActivity{
                 inv_site.setText(model.getSite());
                 inv_x.setText((model.getX()).toString());
                 inv_y.setText((model.getY()).toString());
-
             }
         };
         listOfCards.setAdapter(adapter);
     }
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -121,7 +98,6 @@ public class MenuActivity extends AppCompatActivity{
             hideSystemUI();
         }
     }
-
     private void hideSystemUI() {
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
