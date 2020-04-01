@@ -38,9 +38,8 @@ public class MenuActivity extends AppCompatActivity{
     private String descr;
     private String image;
     private String site;
-    private Double x;
-    private Double y;
-
+    private String x;
+    private String y;
 
     private ListView listOfCards;
     @Override
@@ -55,15 +54,21 @@ public class MenuActivity extends AppCompatActivity{
         listOfCards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //toDescriptionActivity.putExtra("title", title);
-                //toDescriptionActivity.putExtra("descr", descr);
-                //toDescriptionActivity.putExtra("image", image);
-                //toDescriptionActivity.putExtra("x", x);
-                //toDescriptionActivity.putExtra("y", y);
+                title = ((TextView)(view.findViewById(R.id.card_title))).getText().toString();
+                descr = ((TextView)(view.findViewById(R.id.card_inv_descr))).getText().toString();
+                image = ((TextView)(view.findViewById(R.id.card_inv_image))).getText().toString();
+                site = ((TextView)(view.findViewById(R.id.card_inv_site))).getText().toString();
+                x = ((TextView)(view.findViewById(R.id.card_inv_x))).getText().toString();
+                y = ((TextView)(view.findViewById(R.id.card_inv_y))).getText().toString();
+
+                toDescriptionActivity.putExtra("title", title);
+                toDescriptionActivity.putExtra("descr", descr);
+                toDescriptionActivity.putExtra("image", image);
+                toDescriptionActivity.putExtra("x", Double.parseDouble(x));
+                toDescriptionActivity.putExtra("y", Double.parseDouble(y));
                 startActivity(toDescriptionActivity);
             }
         });
-
 
         displayAllCards();
     }
@@ -75,24 +80,29 @@ public class MenuActivity extends AppCompatActivity{
         adapter = new FirebaseListAdapter<Card>(this, Card.class, R.layout.card, FirebaseDatabase.getInstance().getReference().child("Universities")) {
             @Override
             protected void populateView(View v, Card model, int position) {
-                TextView card_title, card_descr;
-                ImageView card_image;
+                TextView vis_title, vis_descr;
+                ImageView vis_image;
 
-                card_title = v.findViewById(R.id.card_title);
-                card_descr = v.findViewById(R.id.card_descr);
-                card_image = v.findViewById(R.id.card_image);
+                vis_title = v.findViewById(R.id.card_title);
+                vis_descr = v.findViewById(R.id.card_descr);
+                vis_image = v.findViewById(R.id.card_image);
 
-                card_title.setText(model.getTitle());
-                card_descr.setText(model.getTitle_descr());
+                vis_title.setText(model.getTitle());
+                vis_descr.setText(model.getTitle_descr());
+                Picasso.with(MenuActivity.this).load(model.getLogo()).into(vis_image);
 
-                Picasso.with(MenuActivity.this).load(model.getLogo()).into(card_image);
+                TextView inv_descr = v.findViewById(R.id.card_inv_descr);
+                TextView inv_image = v.findViewById(R.id.card_inv_image);
+                TextView inv_site = v.findViewById(R.id.card_inv_site);
+                TextView inv_x = v.findViewById(R.id.card_inv_x);
+                TextView inv_y = v.findViewById(R.id.card_inv_y);
 
-                title = model.getTitle();
-                descr = model.getDescr();
-                image = model.getImage();
-                site = model.getSite();
-                x = model.getX();
-                y = model.getY();
+                inv_image.setText(model.getImage());
+                inv_descr.setText(model.getDescr());
+                inv_site.setText(model.getSite());
+                inv_x.setText((model.getX()).toString());
+                inv_y.setText((model.getY()).toString());
+
             }
         };
         listOfCards.setAdapter(adapter);

@@ -52,7 +52,7 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
     private Session searchSession;
     private String title;
     Point resultLocation;
-    private float x, y;
+    private Double x, y;
 
     Context mContext;
 
@@ -84,8 +84,8 @@ public class SearchActivity extends Activity implements Session.SearchListener, 
 
         Intent fromDescriptionActivity = getIntent();
         title = fromDescriptionActivity.getStringExtra("title");
-        x = fromDescriptionActivity.getFloatExtra("x", (float) 55.929729);
-        y = fromDescriptionActivity.getFloatExtra("y", (float) 37.520809);
+        x = fromDescriptionActivity.getDoubleExtra("x", (float) 55.929729);
+        y = fromDescriptionActivity.getDoubleExtra("y", (float) 37.520809);
         searchEdit.setText(title);
 
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {

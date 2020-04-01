@@ -27,8 +27,8 @@ import java.util.List;
 
 public class DrivingActivity extends Activity implements DrivingSession.DrivingRouteListener {
 
-    private float end_x, end_y;
-    private float start_x, start_y;
+    private Double end_x, end_y;
+    private Double start_x, start_y;
 
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private Point ROUTE_START_LOCATION = new Point(59.959194, 30.407094);
@@ -42,10 +42,10 @@ public class DrivingActivity extends Activity implements DrivingSession.DrivingR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent fromDescriptionActivity = getIntent();
-        end_x = fromDescriptionActivity.getFloatExtra("x", (float) 55.733330);
-        end_y = fromDescriptionActivity.getFloatExtra("y", (float) 55.733330);
-        start_x = (float)55.751853;
-        start_y = (float)37.679608;
+        end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
+        end_y = fromDescriptionActivity.getDoubleExtra("y", (Double) 55.733330);
+        start_x = (Double)55.751853;
+        start_y = (Double)37.679608;
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);
         DirectionsFactory.initialize(this);

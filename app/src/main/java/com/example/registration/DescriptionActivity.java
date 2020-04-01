@@ -48,8 +48,8 @@ public class DescriptionActivity extends AppCompatActivity {
         descr = fromMenuActivity.getStringExtra("descr");
         image = fromMenuActivity.getStringExtra("image");
         site = fromMenuActivity.getStringExtra("site");
-        //x = fromMenuActivity.getDoubleExtra("x", 0);
-        //y = fromMenuActivity.getDoubleExtra("y", 0);
+        x = fromMenuActivity.getDoubleExtra("x", 0);
+        y = fromMenuActivity.getDoubleExtra("y", 0);
 
 
             Picasso.with(DescriptionActivity.this).load(image).into(imageview);
@@ -64,9 +64,15 @@ public class DescriptionActivity extends AppCompatActivity {
         startActivity(toChatActivity);
     }
     public void showBalls(View view) {
-        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
-        toBrowser.putExtra("url", site);
-        startActivity(Intent.createChooser(toBrowser, "Browser"));
+        //Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
+        //toBrowser.putExtra("url", site);
+
+        //String url = "http://www.stackoverflow.com";
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW);
+        toBrowser.setData(Uri.parse(site));
+        startActivity(toBrowser);
+
+        //startActivity(Intent.createChooser(toBrowser, "Browser"));
     }
 
     public void showPanorama(View view) {
