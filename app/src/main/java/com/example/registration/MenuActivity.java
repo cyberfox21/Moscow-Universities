@@ -64,6 +64,7 @@ public class MenuActivity extends AppCompatActivity{
                 toDescriptionActivity.putExtra("title", title);
                 toDescriptionActivity.putExtra("descr", descr);
                 toDescriptionActivity.putExtra("image", image);
+                toDescriptionActivity.putExtra("site", site);
                 toDescriptionActivity.putExtra("x", Double.parseDouble(x));
                 toDescriptionActivity.putExtra("y", Double.parseDouble(y));
                 startActivity(toDescriptionActivity);

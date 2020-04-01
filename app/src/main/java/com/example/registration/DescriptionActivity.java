@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,15 +65,19 @@ public class DescriptionActivity extends AppCompatActivity {
         startActivity(toChatActivity);
     }
     public void showBalls(View view) {
-        //Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
-        //toBrowser.putExtra("url", site);
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
+        toBrowser.putExtra("url", site);
 
         //String url = "http://www.stackoverflow.com";
-        Intent toBrowser = new Intent(Intent.ACTION_VIEW);
-        toBrowser.setData(Uri.parse(site));
-        startActivity(toBrowser);
 
-        //startActivity(Intent.createChooser(toBrowser, "Browser"));
+
+        //Intent toBrowser = new Intent(Intent.ACTION_VIEW);
+        //toBrowser.setData(Uri.parse(site));
+        //startActivity(toBrowser);
+
+        startActivity(Intent.createChooser(toBrowser, "Browser"));
+
+        //Toast.makeText(this, "URL: " + site, Toast.LENGTH_LONG).show();
     }
 
     public void showPanorama(View view) {
