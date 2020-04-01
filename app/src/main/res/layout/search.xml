@@ -21,7 +21,7 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:layout_margin="8dp"
-            android:background="@drawable/style_4"
+            android:background="@drawable/style_8"
             android:layout_height="wrap_content"
             android:id="@+id/search_edit"
             android:imeOptions="actionSearch"
