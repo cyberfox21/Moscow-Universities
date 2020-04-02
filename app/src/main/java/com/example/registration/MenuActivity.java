@@ -42,6 +42,13 @@ public class MenuActivity extends AppCompatActivity{
         setContentView(R.layout.menu);
 
         search_panel = findViewById(R.id.search_panel);
+        //disableSearchPanel(search_panel);
+        search_panel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enableSearchPanel(v);
+            }
+        });
 //        search_panel.addTextChangedListener(new TextWatcher() {
 //
 //            @Override
@@ -86,11 +93,22 @@ public class MenuActivity extends AppCompatActivity{
         });
         displayAllCards();
     }
+//    public void disableSearchPanel(View v) {
+//        v.setFocusable(false);
+//        v.setEnabled(false);
+//    }
 
-    public void searchItem(){
-        flag = true;
-        displayAllCards();
+    public void enableSearchPanel(View v) {
+        v.setFocusable(true);
+        v.setEnabled(true);
+        v.setFocusableInTouchMode(true);
+        v.setClickable(true);
     }
+
+//    public void searchItem(){
+//        flag = true;
+//        displayAllCards();
+//    }
 
     private void displayAllCards() {
         //ListView listOfCards = findViewById(R.id.list_of_cards);

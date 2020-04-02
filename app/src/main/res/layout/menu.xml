@@ -15,6 +15,12 @@
         android:hint="Поиск Вуза"
         android:layout_margin="10dp"
         android:textSize="22dp"
+
+        android:clickable="false"
+        android:cursorVisible="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+
         android:gravity="center"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
@@ -22,9 +28,7 @@
         android:paddingRight="15dp"
         android:textColor="#ffffff"
         android:textColorHint="#595959"
-        android:background="@drawable/style_8">
-
-    </EditText>
+        android:background="@drawable/style_8" />
 
     <ListView
         android:id="@+id/list_of_cards"
