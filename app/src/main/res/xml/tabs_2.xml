@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        drawable="@drawable/ic_tonality_black_24dp"
+        text="@string/panorama" />
+
+    <tab
+        drawable="@drawable/ic_location_searching_black_24dp"
+        text="@string/location_button" />
+
+    <tab
+        drawable="@drawable/ic_timeline_black_24dp"
+        text="@string/build_a_route" />
+
+</tabs>

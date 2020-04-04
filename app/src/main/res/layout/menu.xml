@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:hint="Поиск Вуза"
+        android:hint="Поиск ВУЗа"
         android:layout_margin="10dp"
         android:textSize="22dp"
-
+        android:textCursorDrawable="@drawable/cursor_color"
         android:clickable="false"
         android:cursorVisible="true"
         android:focusable="false"

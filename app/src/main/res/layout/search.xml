@@ -14,6 +14,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="Switch" />
+
         <EditText
             android:layout_width="fill_parent"
             android:layout_weight="0.2"
@@ -56,20 +64,28 @@
             app:srcCompat="@drawable/route" />
 
 
+        <com.iammert.library.readablebottombar.ReadableBottomBar
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            app:rbb_tabs="@xml/tabs_2"
+            app:rbb_backgroundColor="#000000"
+            app:rbb_activeItemType="text"
+            app:rbb_textColor="#ffffff"/>
 
-<!--        <Button-->
-<!--            android:id="@+id/menu_button"-->
-<!--            android:layout_gravity="right"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_weight="0.2"-->
-<!--            android:layout_margin="10dp"-->
-<!--            android:background="@drawable/style_3"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginRight="5dp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:text="@string/buildings" />-->
+
+        <!--        <Button-->
+        <!--            android:id="@+id/menu_button"-->
+        <!--            android:layout_gravity="right"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_weight="0.2"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            android:background="@drawable/style_3"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_alignParentEnd="true"-->
+        <!--            android:layout_alignParentBottom="true"-->
+        <!--            android:layout_marginRight="5dp"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:text="@string/buildings" />-->
     </LinearLayout>
 
 </RelativeLayout>
