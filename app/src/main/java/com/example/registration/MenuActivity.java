@@ -79,7 +79,7 @@ public class MenuActivity extends AppCompatActivity{
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchText = search_panel.getText().toString();
+                String searchText = (search_panel.getText().toString()).toUpperCase();
                 firebaseUniversitySearch(searchText);
             }
         });
