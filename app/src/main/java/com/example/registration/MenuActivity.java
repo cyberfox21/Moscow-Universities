@@ -1,5 +1,6 @@
 package com.example.registration;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -62,7 +65,7 @@ public class MenuActivity extends AppCompatActivity{
         search_panel = findViewById(R.id.search_panel);
         searchBtn = findViewById(R.id.searchBtn);
 
-        Intent toDescriptionActivity = new Intent(this, DescriptionActivity.class);
+        //Intent toDescriptionActivity = new Intent(this, DescriptionActivity.class);
 
         listOfCards = findViewById(R.id.list_of_cards);
         listOfCards.setHasFixedSize(true);
@@ -126,6 +129,49 @@ public class MenuActivity extends AppCompatActivity{
         };
 
         listOfCards.setAdapter(firebaseRecyclerAdapter);
+        listOfCards.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(MenuActivity.this, new GestureDetector.SimpleOnGestureListener() {
+
+                @Override public boolean onSingleTapUp(MotionEvent motionEvent) {
+
+                    return true;
+                }
+
+            });
+            @Override
+            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+                View view = rv.findChildViewUnder(e.getX(), e.getY());
+                if(view != null && gestureDetector.onTouchEvent(e)) {
+                    title = ((TextView)(view.findViewById(R.id.card_title))).getText().toString();
+                    descr = ((TextView)(view.findViewById(R.id.card_inv_descr))).getText().toString();
+                    image = ((TextView)(view.findViewById(R.id.card_inv_image))).getText().toString();
+                    site = ((TextView)(view.findViewById(R.id.card_inv_site))).getText().toString();
+                    x = ((TextView)(view.findViewById(R.id.card_inv_x))).getText().toString();
+                    y = ((TextView)(view.findViewById(R.id.card_inv_y))).getText().toString();
+
+                    Intent toDescriptionActivity = new Intent(MenuActivity.this, DescriptionActivity.class);
+                    toDescriptionActivity.putExtra("title", title);
+                    toDescriptionActivity.putExtra("descr", descr);
+                    toDescriptionActivity.putExtra("image", image);
+                    toDescriptionActivity.putExtra("site", site);
+                    toDescriptionActivity.putExtra("x", Double.parseDouble(x));
+                    toDescriptionActivity.putExtra("y", Double.parseDouble(y));
+                    startActivity(toDescriptionActivity);
+                }
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
+
+
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
+            }
+        });
     }
 
     public void enableSearchPanel(View v) {
