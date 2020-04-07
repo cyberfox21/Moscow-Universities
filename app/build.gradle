@@ -22,6 +22,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.yandex.android:mapkit:3.4.0'
     implementation 'com.yandex.android:search:3.4.0'
     implementation 'com.yandex.android:directions:3.4.0'
@@ -32,6 +33,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'com.firebaseui:firebase-ui-database:2.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.iammert:ReadableBottomBar:0.2'
@@ -45,3 +47,4 @@ dependencies {
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
