@@ -108,7 +108,7 @@ public class MenuActivity extends AppCompatActivity{
                     title_descr = ((TextView)(view.findViewById(R.id.card_descr))).getText().toString();
                     descr = ((TextView)(view.findViewById(R.id.card_inv_descr))).getText().toString();
                     image = ((TextView)(view.findViewById(R.id.card_inv_image))).getText().toString();
-                    logo = ((TextView)(view.findViewById(R.id.card_image))).getText().toString();
+                    logo = ((TextView)(view.findViewById(R.id.card_inv_logo))).getText().toString();
                     site = ((TextView)(view.findViewById(R.id.card_inv_site))).getText().toString();
                     x = ((TextView)(view.findViewById(R.id.card_inv_x))).getText().toString();
                     y = ((TextView)(view.findViewById(R.id.card_inv_y))).getText().toString();

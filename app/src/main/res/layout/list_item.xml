@@ -43,5 +43,4 @@
         app:arrowCenter="false"
         app:arrowHeight="10dp"
         tools:targetApi="n" />
-
 </RelativeLayout>
