@@ -41,6 +41,8 @@ public class MenuActivity extends AppCompatActivity{
     private Query firebaseSearchQuery;
 
     private String title;
+    private String logo;
+    private String title_descr;
     private String descr;
     private String image;
     private String site;
@@ -103,14 +105,18 @@ public class MenuActivity extends AppCompatActivity{
                 View view = rv.findChildViewUnder(e.getX(), e.getY());
                 if(view != null && gestureDetector.onTouchEvent(e)) {
                     title = ((TextView)(view.findViewById(R.id.card_title))).getText().toString();
+                    title_descr = ((TextView)(view.findViewById(R.id.card_descr))).getText().toString();
                     descr = ((TextView)(view.findViewById(R.id.card_inv_descr))).getText().toString();
                     image = ((TextView)(view.findViewById(R.id.card_inv_image))).getText().toString();
+                    logo = ((TextView)(view.findViewById(R.id.card_image))).getText().toString();
                     site = ((TextView)(view.findViewById(R.id.card_inv_site))).getText().toString();
                     x = ((TextView)(view.findViewById(R.id.card_inv_x))).getText().toString();
                     y = ((TextView)(view.findViewById(R.id.card_inv_y))).getText().toString();
 
                     Intent toDescriptionActivity = new Intent(MenuActivity.this, DescriptionActivity.class);
                     toDescriptionActivity.putExtra("title", title);
+                    toDescriptionActivity.putExtra("logo", logo);
+                    toDescriptionActivity.putExtra("title_descr", title_descr);
                     toDescriptionActivity.putExtra("descr", descr);
                     toDescriptionActivity.putExtra("image", image);
                     toDescriptionActivity.putExtra("site", site);

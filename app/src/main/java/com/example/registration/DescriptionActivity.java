@@ -14,8 +14,10 @@ public class DescriptionActivity extends AppCompatActivity {
     private TextView descriptionTextView, textViewUniversityTitle;
 
     String title;
+    String title_descr;
     String descr;
     String site;
+    String logo;
     String image;
     Double x;
     Double y;
@@ -31,8 +33,10 @@ public class DescriptionActivity extends AppCompatActivity {
 
         Intent fromMenuActivity = getIntent();
         title = fromMenuActivity.getStringExtra("title");
+        title_descr = fromMenuActivity.getStringExtra("title_descr");
         descr = fromMenuActivity.getStringExtra("descr");
         image = fromMenuActivity.getStringExtra("image");
+        image = fromMenuActivity.getStringExtra("logo");
         site = fromMenuActivity.getStringExtra("site");
         x = fromMenuActivity.getDoubleExtra("x", 0);
         y = fromMenuActivity.getDoubleExtra("y", 0);
