@@ -162,25 +162,6 @@ public class MenuActivity extends AppCompatActivity{
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
