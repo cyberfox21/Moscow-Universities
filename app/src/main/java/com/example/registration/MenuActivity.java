@@ -80,7 +80,6 @@ public class MenuActivity extends AppCompatActivity{
     }
 
     private void firebaseUniversitySearch(String searchText) {
-        Toast.makeText(MenuActivity.this, "Started Search", Toast.LENGTH_LONG).show();
         firebaseSearchQuery = universitiesDatabase.orderByChild("title").startAt(searchText).endAt(searchText + "\uf8ff");
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Card, CardViewHolder>(
@@ -155,6 +154,7 @@ public class MenuActivity extends AppCompatActivity{
             Picasso.with(ctx).load(card_image).into((ImageView)view.findViewById(R.id.card_image));
 
             ((TextView)(view.findViewById(R.id.card_inv_descr))).setText(descr);
+            ((TextView)(view.findViewById(R.id.card_inv_logo))).setText(card_image);
             ((TextView)(view.findViewById(R.id.card_inv_image))).setText(image);
             ((TextView)(view.findViewById(R.id.card_inv_site))).setText(card_site);
             ((TextView)(view.findViewById(R.id.card_inv_x))).setText(card_x.toString());
