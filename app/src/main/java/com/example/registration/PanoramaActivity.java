@@ -43,21 +43,18 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
         panoramaService = PlacesFactory.getInstance().createPanoramaService();
         searchSession = panoramaService.findNearest(SEARCH_LOCATION, this);
     }
-
     @Override
     protected void onStop() {
         panoramaView.onStop();
         MapKitFactory.getInstance().onStop();
         super.onStop();
     }
-
     @Override
     protected void onStart() {
         super.onStart();
         MapKitFactory.getInstance().onStart();
         panoramaView.onStart();
     }
-
     @Override
     public void onPanoramaSearchResult(String panoramaId) {
         panoramaView.getPlayer().openPanorama(panoramaId);
@@ -66,7 +63,6 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
         panoramaView.getPlayer().enableZoom();
         panoramaView.getPlayer().enableMarkers();
     }
-
     @Override
     public void onPanoramaSearchError(@NonNull Error error) {
         String errorMessage = getString(R.string.unknown_error_message);
@@ -79,5 +75,4 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
         }
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
-
 }
