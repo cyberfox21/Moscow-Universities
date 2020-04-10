@@ -104,6 +104,7 @@
                 android:background="@drawable/style_9"
                 android:onClick="showBalls"
                 android:padding="10dp"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:text="@string/balls_button"
                 android:textAllCaps="false"

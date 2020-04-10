@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
+    android:background="#000000"
     tools:context=".ChatActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -13,10 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:layout_margin="6dp"
+        android:backgroundTint="#ffffff"
         android:src="@drawable/ic_action_name"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:tint="@color/white"
+        android:tint="#231B47"
         app:fabSize="mini"/>
     <!--    android:layout_margin="20sp"-->
 
