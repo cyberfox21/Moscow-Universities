@@ -1,16 +1,24 @@
 package com.example.registration;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.palette.graphics.Palette;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.squareup.picasso.Picasso;
@@ -22,9 +30,19 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
+    private LinearLayout recyclerView;
+
+    //private DessertAdapter dessertAdapter;
 
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
+
+    private EditText search_panel;
+    private Boolean flag = false;
+
+    private FirebaseListAdapter<Card> adapter;
+    private Intent toDescriptionActivity;
+
 
     String title;
     String title_descr;
@@ -56,9 +74,12 @@ public class DescriptionActivity extends AppCompatActivity {
         y = fromMenuActivity.getDoubleExtra("y", 0);
 
         Picasso.with(DescriptionActivity.this).load(image).into(imageview);
-        //Picasso.with(DescriptionActivity.this).load(logo).into(logo_d);
+        Picasso.with(DescriptionActivity.this).load(logo).into(logo_d);
         descriptionTextView.setText(descr);
-        textViewUniversityTitle.setText(title);
+        // textViewUniversityTitle.setText(title);
+
+
+
 
         final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
@@ -68,12 +89,14 @@ public class DescriptionActivity extends AppCompatActivity {
         appBarLayout = findViewById(R.id.appbar);
 
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(title_descr);
+        collapsingToolbar.setTitle(title);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 Log.d(DescriptionActivity.class.getSimpleName(), "onOffsetChanged: verticalOffset: " + verticalOffset);
+
+                //  Vertical offset == 0 indicates appBar is fully expanded.
                 if (Math.abs(verticalOffset) > 200) {
                     appBarExpanded = false;
                     invalidateOptionsMenu();
@@ -83,36 +106,28 @@ public class DescriptionActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
     }
+
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
+            //collapsed
             collapsedMenu.add("Add")
                     .setIcon(R.drawable.ic_message_black_24dp)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        } else {}
+        } else {
+            //expanded
+        }
         return super.onPrepareOptionsMenu(collapsedMenu);
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                goBack();
-                return true;
 
-        }
-        if (item.getTitle() == "Add") {
-            openChat();
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        collapsedMenu = menu;
-        return true;
-    }
+
     public void openChat() {
         Intent toChatActivity = new Intent(this, ChatActivity.class);
         toChatActivity.putExtra("title", title);
@@ -163,4 +178,28 @@ public class DescriptionActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                goBack();
+                return true;
+
+        }
+        if (item.getTitle() == "Add") {
+            openChat();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        collapsedMenu = menu;
+        return true;
+    }
+
+
 }
