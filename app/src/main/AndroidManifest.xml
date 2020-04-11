@@ -8,25 +8,33 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/logo2"
+        android:icon="@drawable/logoloading"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DrivingActivity"></activity>
+        <activity android:name=".SplashScreen"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity android:name=".DrivingActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".MenuActivity" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MenuActivity">
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
-        <activity android:name=".LoadingActivity"/>
+        <activity android:name=".LoadingActivity" />
         <activity android:name=".PanoramaActivity" />
         <activity android:name=".SearchActivity" />
     </application>
+
+
 
 </manifest>

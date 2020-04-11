@@ -26,5 +26,6 @@
     <color name="deep_orange">#FF5722</color>
     <color name="brown">#795548</color>
     <color name="grey">#E0E0E0</color>
+    <color name="black">#000000</color>
 </resources>
 

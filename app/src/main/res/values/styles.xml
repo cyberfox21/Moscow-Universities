@@ -15,4 +15,9 @@
         <item name="android:textSize">34dp</item>
         <item name="android:singleLine">true</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_resource</item>
+    </style>
+
 </resources>
