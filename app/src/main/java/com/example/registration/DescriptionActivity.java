@@ -161,12 +161,6 @@ public class DescriptionActivity extends AppCompatActivity {
         toMapActivity.putExtra("y", y);
         startActivity(toMapActivity);
     }
-//    public void showRoute(View view) {
-//        Intent toDrivingActivity = new Intent(this, DrivingActivity.class);
-//        toDrivingActivity.putExtra("x", x);
-//        toDrivingActivity.putExtra("y", y);
-//        startActivity(toDrivingActivity);
-//    }
     public void goBack() {
         Intent toMenuActivity = new Intent(this, MenuActivity.class);
         startActivity(toMenuActivity);
