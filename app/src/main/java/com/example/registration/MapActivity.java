@@ -89,7 +89,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         start_x = 55.751853;
         start_y = 37.679608;
 
-
+        hideSystemUI();
 
         mContext = MapActivity.this;
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED);
