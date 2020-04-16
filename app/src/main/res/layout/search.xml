@@ -19,7 +19,7 @@
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="0.05"
             android:text="Switch" />
 
         <EditText
@@ -39,7 +39,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="9"
+            android:layout_weight="12"
             android:visibility="invisible" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
