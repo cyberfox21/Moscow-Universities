@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Switch
+        <Space
             android:id="@+id/switch1"
             android:visibility="invisible"
             android:layout_width="match_parent"
@@ -25,20 +25,50 @@
             android:layout_weight="0.2"
             android:text="Switch" />
 
-        <EditText
-            android:layout_width="fill_parent"
-            android:layout_weight="0.2"
-            android:padding="5dp"
-            android:visibility="visible"
-            android:textColor="@color/white"
-            android:gravity="center"
+        <LinearLayout
             android:layout_margin="8dp"
-            android:background="@drawable/style_8"
-            android:layout_height="wrap_content"
-            android:id="@+id/search_edit"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:maxLines="1" />
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/style_10"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/search_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Поиск Вуза"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="11dp"
+                android:textSize="18dp"
+                android:inputType="textPersonName"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:cursorVisible="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="15dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#595959"
+                android:background="@color/black" />
+
+            <ImageButton
+                android:layout_margin="4dp"
+                android:id="@+id/searchBtn"
+                android:layout_weight="0.7"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000000"
+                android:src="@drawable/ic_search_black_24dp"/>
+
+        </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
