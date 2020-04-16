@@ -53,6 +53,7 @@ public class MenuActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hideSystemUI();
         setContentView(R.layout.menu);
 
         universitiesDatabase = FirebaseDatabase.getInstance().getReference("Universities");
