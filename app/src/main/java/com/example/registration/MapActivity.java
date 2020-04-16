@@ -210,7 +210,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
             errorMessage = getString(R.string.network_error_message);
         }
 
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onCameraPositionChanged(
