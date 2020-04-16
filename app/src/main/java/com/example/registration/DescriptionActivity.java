@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 public class DescriptionActivity extends AppCompatActivity {
 
@@ -30,19 +31,10 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
-    private LinearLayout recyclerView;
-
-    //private DessertAdapter dessertAdapter;
+    private FloatingActionButton location_button;
 
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
-
-    private EditText search_panel;
-    private Boolean flag = false;
-
-    private FirebaseListAdapter<Card> adapter;
-    private Intent toDescriptionActivity;
-
 
     String title;
     String title_descr;
@@ -62,6 +54,7 @@ public class DescriptionActivity extends AppCompatActivity {
         imageview = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
         textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
+        location_button = findViewById(R.id.location_button);
 
         Intent fromMenuActivity = getIntent();
         title = fromMenuActivity.getStringExtra("title");
@@ -76,10 +69,6 @@ public class DescriptionActivity extends AppCompatActivity {
         Picasso.with(DescriptionActivity.this).load(image).into(imageview);
         Picasso.with(DescriptionActivity.this).load(logo).into(logo_d);
         descriptionTextView.setText(descr);
-        // textViewUniversityTitle.setText(title);
-
-
-
 
         final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
@@ -96,7 +85,6 @@ public class DescriptionActivity extends AppCompatActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 Log.d(DescriptionActivity.class.getSimpleName(), "onOffsetChanged: verticalOffset: " + verticalOffset);
 
-                //  Vertical offset == 0 indicates appBar is fully expanded.
                 if (Math.abs(verticalOffset) > 200) {
                     appBarExpanded = false;
                     invalidateOptionsMenu();
@@ -107,76 +95,26 @@ public class DescriptionActivity extends AppCompatActivity {
             }
         });
 
+        location_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLocation(v);
+            }
+        });
+    }
 
-
-
-
+    private void openLocation() {
     }
 
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
-            //collapsed
             collapsedMenu.add("Add")
                     .setIcon(R.drawable.ic_message_black_24dp)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         } else {
-            //expanded
         }
         return super.onPrepareOptionsMenu(collapsedMenu);
-    }
-
-
-
-    public void openChat() {
-        Intent toChatActivity = new Intent(this, ChatActivity.class);
-        toChatActivity.putExtra("title", title);
-        startActivity(toChatActivity);
-    }
-    public void showBalls(View view) {
-        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
-        toBrowser.putExtra("url", site);
-        startActivity(Intent.createChooser(toBrowser, "Browser"));
-    }
-    public void showPanorama(View view) {
-        Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
-        toPanoramaActivity.putExtra("x", x);
-        toPanoramaActivity.putExtra("y", y);
-        startActivity(toPanoramaActivity);
-    }
-    public void showLocation(View view) {
-        Intent toSearchActivity = new Intent(this, SearchActivity.class);
-        toSearchActivity.putExtra("title", title);
-        toSearchActivity.putExtra("x", x);
-        toSearchActivity.putExtra("y", y);
-        startActivity(toSearchActivity);
-    }
-    public void showRoute(View view) {
-        Intent toDrivingActivity = new Intent(this, DrivingActivity.class);
-        toDrivingActivity.putExtra("x", x);
-        toDrivingActivity.putExtra("y", y);
-        startActivity(toDrivingActivity);
-    }
-    public void goBack() {
-        Intent toMenuActivity = new Intent(this, MenuActivity.class);
-        startActivity(toMenuActivity);
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            hideSystemUI();
-        }
-    }
-    private void hideSystemUI() {
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
 
     @Override
@@ -200,6 +138,55 @@ public class DescriptionActivity extends AppCompatActivity {
         collapsedMenu = menu;
         return true;
     }
-
+    public void openChat() {
+        Intent toChatActivity = new Intent(this, ChatActivity.class);
+        toChatActivity.putExtra("title", title);
+        startActivity(toChatActivity);
+    }
+    public void showBalls(View view) {
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
+        toBrowser.putExtra("url", site);
+        startActivity(Intent.createChooser(toBrowser, "Browser"));
+    }
+    public void showPanorama(View view) {
+        Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
+        toPanoramaActivity.putExtra("x", x);
+        toPanoramaActivity.putExtra("y", y);
+        startActivity(toPanoramaActivity);
+    }
+    public void showLocation(View view) {
+        Intent toMapActivity = new Intent(this, MapActivity.class);
+        toMapActivity.putExtra("title", title);
+        toMapActivity.putExtra("x", x);
+        toMapActivity.putExtra("y", y);
+        startActivity(toMapActivity);
+    }
+//    public void showRoute(View view) {
+//        Intent toDrivingActivity = new Intent(this, DrivingActivity.class);
+//        toDrivingActivity.putExtra("x", x);
+//        toDrivingActivity.putExtra("y", y);
+//        startActivity(toDrivingActivity);
+//    }
+    public void goBack() {
+        Intent toMenuActivity = new Intent(this, MenuActivity.class);
+        startActivity(toMenuActivity);
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+    private void hideSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
 
 }

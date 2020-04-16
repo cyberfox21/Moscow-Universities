@@ -2,21 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/relativeLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.yandex.mapkit.mapview.MapView>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/toolBar"
+        android:layout_alignBottom="@id/mapview"/>
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <Switch
             android:id="@+id/switch1"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
@@ -26,6 +29,7 @@
             android:layout_width="fill_parent"
             android:layout_weight="0.2"
             android:padding="5dp"
+            android:visibility="visible"
             android:textColor="@color/white"
             android:gravity="center"
             android:layout_margin="8dp"
@@ -42,17 +46,24 @@
             android:layout_weight="9"
             android:visibility="invisible" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:itemBackground="?attr/colorPrimary"
-            app:itemIconTint="@drawable/selector_bottombar"
-            app:itemTextColor="@drawable/selector_bottombar"
-            app:menu="@menu/bottombar_menu"/>
 
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        app:itemBackground="?attr/colorPrimary"
+        app:itemIconTint="@drawable/selector_bottombar"
+        app:itemTextColor="@drawable/selector_bottombar"
+        app:menu="@menu/bottombar_menu" />
+
 </RelativeLayout>
+
+
+
+
+
