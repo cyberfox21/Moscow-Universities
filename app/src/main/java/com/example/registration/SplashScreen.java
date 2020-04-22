@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import static java.lang.Thread.sleep;
 
@@ -21,25 +24,54 @@ public class SplashScreen extends AppCompatActivity {
         }
 
             setContentView(R.layout.activity_splash_screen);
+        final Animation anim_2;
+        anim_2 = AnimationUtils.loadAnimation(this,R.anim.back);
+        final TextView tv = (TextView) findViewById(R.id.textView2);
             Thread welcomeThread = new Thread() {
 
                 @Override
                 public void run() {
                     try {
                         super.run();
-                        sleep(1500);
+                        sleep(3000);
                     } catch (Exception e) {
 
                     } finally {
+
+                        try {
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+
+                                    tv.startAnimation(anim_2);
+                                    tv.setVisibility(View.INVISIBLE);
+
+                                }
+                            });
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+
+
+
                         Intent i = new Intent(SplashScreen.this,
                                 MenuActivity.class);
+
                         startActivity(i);
+
                         finish();
+
                     }
                 }
             };
             welcomeThread.start();
-        }
+
+    }
+
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
