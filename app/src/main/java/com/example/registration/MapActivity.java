@@ -64,7 +64,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     private Point ROUTE_START_LOCATION = new Point(59.959194, 30.407094);
     private Point ROUTE_END_LOCATION = new Point(55.733330, 37.587649);
 
-    //private MapObjectCollection mapObjects;
+    private MapObjectCollection mapObjects;
     private DrivingRouter drivingRouter;
     private DrivingSession drivingSession;
 
@@ -149,8 +149,9 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                         if(!KEY.equals("route")) {
                             searchLayout.setVisibility(View.INVISIBLE);
                             mapView = findViewById(R.id.mapview);
-                            MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
+                            //MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
                             mapObjects.clear();
+                            //mapView.getMap().getMapObjects().removeAll();
                             //mapObjects = mapView.getMap().getMapObjects().addCollection();
                             final Point SCREEN_CENTER = new Point(
                                     (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
@@ -191,15 +192,16 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     }
     @Override
     public void onSearchResponse(Response response) {
-        MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
+        mapObjects = mapView.getMap().getMapObjects();
         mapObjects.clear();
-
-        for (GeoObjectCollection.Item searchResult : response.getCollection().getChildren()) {
-            resultLocation = searchResult.getObj().getGeometry().get(0).getPoint();
-            if (resultLocation != null) {
-                mapObjects.addPlacemark(
-                        resultLocation,
-                        ImageProvider.fromResource(this, R.drawable.pointer));
+        if (KEY == "location") {
+            for (GeoObjectCollection.Item searchResult : response.getCollection().getChildren()) {
+                resultLocation = searchResult.getObj().getGeometry().get(0).getPoint();
+                if (resultLocation != null) {
+                    mapObjects.addPlacemark(
+                            resultLocation,
+                            ImageProvider.fromResource(this, R.drawable.pointer));
+                }
             }
         }
     }
@@ -227,7 +229,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     @Override
     public void onDrivingRoutes(List<DrivingRoute> routes) {
         for (DrivingRoute route : routes) {
-            MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
+            //MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
             mapObjects.addPolyline(route.getGeometry());
         }
     }
