@@ -26,6 +26,7 @@
             android:text="Switch" />
 
         <LinearLayout
+            android:id="@+id/search_layout"
             android:layout_margin="8dp"
             android:layout_width="match_parent"
             android:orientation="horizontal"

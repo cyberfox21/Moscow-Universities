@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private EditText searchEdit;
+    private LinearLayout searchLayout;
     private MapView mapView;
     private SearchManager searchManager;
     private Session searchSession;
@@ -62,7 +64,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     private Point ROUTE_START_LOCATION = new Point(59.959194, 30.407094);
     private Point ROUTE_END_LOCATION = new Point(55.733330, 37.587649);
 
-    private MapObjectCollection mapObjects;
+    //private MapObjectCollection mapObjects;
     private DrivingRouter drivingRouter;
     private DrivingSession drivingSession;
 
@@ -80,8 +82,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         SearchFactory.initialize(MapActivity.this);
         DirectionsFactory.initialize( MapActivity.this);
 
-        setContentView(R.layout.activity_map);
-
         Intent fromDescriptionActivity = getIntent();
         title = fromDescriptionActivity.getStringExtra("title");
         end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
@@ -89,12 +89,18 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         start_x = 55.751853;
         start_y = 37.679608;
 
+        ROUTE_START_LOCATION = new Point(start_x, start_y);
+        ROUTE_END_LOCATION = new Point(end_x, end_y);
+
+        setContentView(R.layout.activity_map);
+
         hideSystemUI();
 
         mContext = MapActivity.this;
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED);
         mapView = (MapView)findViewById(R.id.mapview);
         mapView.getMap().addCameraListener(MapActivity.this);
+        searchLayout = findViewById(R.id.search_layout);
         searchEdit = (EditText)findViewById(R.id.search_edit);
         searchEdit.setText(title);
         searchEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -118,7 +124,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 switch (item.getItemId()) {
                     case R.id.action_location:
                         if(!KEY.equals("location")) {
-                            searchEdit.setVisibility(View.VISIBLE);
+                            searchLayout.setVisibility(View.VISIBLE);
                             mContext = MapActivity.this;
                             mapView.getMap().addCameraListener(MapActivity.this);
                             searchEdit.setText(title);
@@ -134,33 +140,29 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             mapView.getMap().move(
                                     new CameraPosition(new Point(end_x, end_y), 14.0f, 0.0f, 0.0f));
                             submitQuery(searchEdit.getText().toString());
-                            //getSupportFragmentManager().beginTransaction().replace(R.id.fragPlace, fragLocation).commit();
                             KEY = "location";
                         }else {
                             Toast.makeText(MapActivity.this, "Location уже загружен", Toast.LENGTH_SHORT).show();
                         }
                         return true;
                     case R.id.action_route:
-//                        if(!KEY.equals("route")) {
-//                            //getSupportFragmentManager().beginTransaction().replace(R.id.fragPlace, fragRoute).commit();
-//                            searchEdit.setVisibility(View.INVISIBLE);
-//                            ROUTE_START_LOCATION = new Point(start_x, start_y);
-//                            ROUTE_END_LOCATION = new Point(end_x, end_y);
-//
-//                            Point SCREEN_CENTER = new Point(
-//                                    (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
-//                                    (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
-//
-//                            mapView.getMap().move(new CameraPosition(
-//                                    SCREEN_CENTER, 12, 0, 0));
-//                            drivingRouter = DirectionsFactory.getInstance().createDrivingRouter();
-//                            mapObjects = mapView.getMap().getMapObjects().addCollection();
-//
-//                            submitRequest();
-//                            KEY = "route";
-//                        }else {
-//                            Toast.makeText(MapActivity.this, "Route уже загружен", Toast.LENGTH_SHORT).show();
-//                        }
+                        if(!KEY.equals("route")) {
+                            searchLayout.setVisibility(View.INVISIBLE);
+                            mapView = findViewById(R.id.mapview);
+                            MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
+                            mapObjects.clear();
+                            //mapObjects = mapView.getMap().getMapObjects().addCollection();
+                            final Point SCREEN_CENTER = new Point(
+                                    (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
+                                    (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
+                            mapView.getMap().move(new CameraPosition(
+                                SCREEN_CENTER, 12, 0, 0));
+                            drivingRouter = DirectionsFactory.getInstance().createDrivingRouter();
+                            submitRequest();
+                            KEY = "route";
+                        }else {
+                            Toast.makeText(MapActivity.this, "Route уже загружен", Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                 }
                 return false;
@@ -218,13 +220,14 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
             CameraPosition cameraPosition,
             CameraUpdateSource cameraUpdateSource,
             boolean finished) {
-        if (finished) {
+        if (finished & KEY == "location") {
             submitQuery(searchEdit.getText().toString());
         }
     }
     @Override
     public void onDrivingRoutes(List<DrivingRoute> routes) {
         for (DrivingRoute route : routes) {
+            MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
             mapObjects.addPolyline(route.getGeometry());
         }
     }
