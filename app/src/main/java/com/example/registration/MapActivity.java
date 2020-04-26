@@ -1,11 +1,19 @@
 package com.example.registration;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +57,7 @@ import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements Session.SearchListener, CameraListener, DrivingSession.DrivingRouteListener {
 
+    private static final int REQUEST_LOCATION = 1;
     private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
     private EditText searchEdit;
     private LinearLayout searchLayout;
@@ -68,6 +77,9 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     private DrivingRouter drivingRouter;
     private DrivingSession drivingSession;
 
+    private LocationManager locationManager;
+    private Double latitude, longitude;
+
     private Context mContext;
 
     private BottomNavigationView toolBar;
@@ -77,6 +89,13 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Add permission
+
+        ActivityCompat.requestPermissions(this, new String []
+                {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+
+
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(MapActivity.this);
         SearchFactory.initialize(MapActivity.this);
@@ -86,11 +105,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         title = fromDescriptionActivity.getStringExtra("title");
         end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
         end_y = fromDescriptionActivity.getDoubleExtra("y", (Double) 55.733330);
-        start_x = 55.751853;
-        start_y = 37.679608;
 
-        ROUTE_START_LOCATION = new Point(start_x, start_y);
-        ROUTE_END_LOCATION = new Point(end_x, end_y);
 
         setContentView(R.layout.activity_map);
 
@@ -147,12 +162,28 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                         return true;
                     case R.id.action_route:
                         if(!KEY.equals("route")) {
+
+                            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                            //Check gps is enable or not
+
+                            if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                                //Write function to enable gps
+                                OnGPS();
+                            } else {
+                                //GPS is already ON
+                                getLocation();
+                            }
+
+                            start_x = latitude;
+                            start_y = longitude;
+
+                            ROUTE_START_LOCATION = new Point(start_x, start_y);
+                            ROUTE_END_LOCATION = new Point(end_x, end_y);
+
                             searchLayout.setVisibility(View.INVISIBLE);
                             mapView = findViewById(R.id.mapview);
-                            //MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
-                            mapObjects.clear();
-                            //mapView.getMap().getMapObjects().removeAll();
-                            //mapObjects = mapView.getMap().getMapObjects().addCollection();
+                            //mapObjects.clear();
                             final Point SCREEN_CENTER = new Point(
                                     (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
                                     (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
@@ -168,9 +199,52 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 }
                 return false;
             }
+
         });
     }
 
+    private void getLocation() {
+        //Check permissions again
+        if(ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String []
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGps = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location locationNetwork = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if(locationGps != null){
+                latitude = locationGps.getLatitude();
+                longitude = locationGps.getLongitude();
+            }
+            else if(locationNetwork != null){
+                latitude = locationNetwork.getLatitude();
+                longitude = locationNetwork.getLongitude();
+            }
+            else{
+                Toast.makeText(this, "Can't get user location", Toast.LENGTH_LONG);
+                start_x = 55.751853;
+                start_y = 37.679608;
+            }
+        }
+    }
+
+    private void OnGPS() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
     private void submitQuery(String query) {
         searchSession = searchManager.submit(
                 query,
