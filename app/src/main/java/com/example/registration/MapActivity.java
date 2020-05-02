@@ -278,6 +278,11 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 }
             }
         }
+        if (KEY == "location"){
+            mapObjects.addPlacemark(
+                    resultLocation,
+                    ImageProvider.fromResource(this, R.drawable.pointer));
+        }
     }
     @Override
     public void onSearchError(Error error) {
