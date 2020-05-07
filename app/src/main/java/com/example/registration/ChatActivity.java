@@ -72,7 +72,6 @@ public class ChatActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser() == null)
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(), SIGN_IN_CODE);
         else
-            Snackbar.make(activity_main, "Вы авторизованы!", Snackbar.LENGTH_LONG).show();
         displayAllMassages();
     }
     private void displayAllMassages() {
