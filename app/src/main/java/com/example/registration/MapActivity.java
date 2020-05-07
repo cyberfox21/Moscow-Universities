@@ -157,7 +157,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             submitQuery(searchEdit.getText().toString());
                             KEY = "location";
                         }else {
-                            Toast.makeText(MapActivity.this, "Location уже загружен", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MapActivity.this, "Location уже загружен", Toast.LENGTH_SHORT).show();
                         }
                         return true;
                     case R.id.action_route:
@@ -202,7 +202,12 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
         });
     }
-
+    public void showPanorama(View view) {
+        Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
+        toPanoramaActivity.putExtra("x", end_x);
+        toPanoramaActivity.putExtra("y", end_y);
+        startActivity(toPanoramaActivity);
+    }
     private void getLocation() {
         //Check permissions again
         if(ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)

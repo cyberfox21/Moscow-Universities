@@ -10,14 +10,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
-
-    <com.iammert.library.readablebottombar.ReadableBottomBar
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        app:rbb_tabs="@xml/tabs"
-        app:rbb_backgroundColor="#000000"
-        app:rbb_activeItemType="text"
-        app:rbb_textColor="#ffffff"/>
-
-
 </LinearLayout>

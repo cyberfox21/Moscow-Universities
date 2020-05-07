@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relativeLayout"
@@ -78,19 +79,74 @@
             android:visibility="invisible" />
 
 
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+            <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--        android:id="@+id/panorama"-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_marginBottom="16dp"-->
+            <!--        android:layout_marginLeft="1.5dp"-->
+            <!--        android:clickable="true"-->
+            <!--        android:onClick="showPanorama"-->
+            <!--        app:borderWidth="2dp"-->
+            <!--        android:backgroundTint="#000000"-->
+            <!--        android:focusable="true"-->
+            <!--        android:src="@drawable/ic_panorama_horizontal_black_24dp"-->
+            <!--        android:layout_gravity="center_horizontal"-->
+            <!--        app:fabSize="normal" />-->
+
+
+            <!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+            <!--            android:id="@+id/toolBar"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_alignParentBottom="true"-->
+            <!--            android:layout_marginBottom="0dp"-->
+            <!--            app:itemBackground="?attr/colorPrimary"-->
+            <!--            app:itemIconTint="@drawable/selector_bottombar"-->
+            <!--            app:itemTextColor="@drawable/selector_bottombar"-->
+            <!--            app:menu="@menu/bottombar_menu" />-->
+
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/panorama"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="#000000"
+                android:clickable="true"
+                android:layout_margin="16dp"
+                android:focusable="true"
+                android:layout_gravity="right|bottom"
+                android:onClick="showPanorama"
+                android:src="@drawable/panorama_360" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            app:itemBackground="?attr/colorPrimary"
+            app:itemIconTint="@drawable/selector_bottombar"
+            app:itemTextColor="@drawable/selector_bottombar"
+            app:menu="@menu/bottombar_menu" >
+
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
 
     </LinearLayout>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/toolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:itemBackground="?attr/colorPrimary"
-        app:itemIconTint="@drawable/selector_bottombar"
-        app:itemTextColor="@drawable/selector_bottombar"
-        app:menu="@menu/bottombar_menu" />
+
 
 </RelativeLayout>
 
