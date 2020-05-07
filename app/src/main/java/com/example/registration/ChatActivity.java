@@ -34,11 +34,9 @@ public class ChatActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SIGN_IN_CODE) {
             if(resultCode == RESULT_OK){
-                Snackbar.make(activity_main, "Вы авторизованы успешно!", Snackbar.LENGTH_LONG).show();
                 displayAllMassages();
             }
             else{
-                Snackbar.make(activity_main, "Вы не авторизованы!", Snackbar.LENGTH_LONG).show();
                 finish();
             }
         }
