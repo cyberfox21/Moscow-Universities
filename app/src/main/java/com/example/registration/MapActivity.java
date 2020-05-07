@@ -65,6 +65,10 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     private SearchManager searchManager;
     private Session searchSession;
     private String title;
+    private String descr;
+    private String site;
+    private String image;
+    private String logo;
     private Point resultLocation;
 
     private Double end_x, end_y;
@@ -103,13 +107,21 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
         Intent fromDescriptionActivity = getIntent();
         title = fromDescriptionActivity.getStringExtra("title");
+        descr = fromDescriptionActivity.getStringExtra("descr");
+        site = fromDescriptionActivity.getStringExtra("site");
         end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
         end_y = fromDescriptionActivity.getDoubleExtra("y", (Double) 55.733330);
-
+        image = fromDescriptionActivity.getStringExtra("image");
+        logo = fromDescriptionActivity.getStringExtra("logo");
 
         setContentView(R.layout.activity_map);
 
         hideSystemUI();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            OnGPS();
+        }
 
         mContext = MapActivity.this;
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED);
@@ -163,13 +175,10 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                     case R.id.action_route:
                         if(!KEY.equals("route")) {
 
-                            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-                            //Check gps is enable or not
-
                             if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
                                 //Write function to enable gps
                                 OnGPS();
+                                Toast.makeText(MapActivity.this, "GPS is on", Toast.LENGTH_SHORT).show();
                             } else {
                                 //GPS is already ON
                                 getLocation();
@@ -177,8 +186,12 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
                             start_x = latitude;
                             start_y = longitude;
-
-                            ROUTE_START_LOCATION = new Point(start_x, start_y);
+                            if (start_x != null && start_y != null){
+                                ROUTE_START_LOCATION = new Point(start_x, start_y);
+                            }
+                            else{
+                                backToDescription();
+                            }
                             ROUTE_END_LOCATION = new Point(end_x, end_y);
 
                             searchLayout.setVisibility(View.INVISIBLE);
@@ -227,24 +240,36 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 longitude = locationNetwork.getLongitude();
             }
             else{
-                Toast.makeText(this, "Can't get user location", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Can't get user location", Toast.LENGTH_LONG).show();
                 start_x = 55.751853;
                 start_y = 37.679608;
+                backToDescription();
             }
         }
     }
-
+    private void backToDescription(){
+        Intent toDescriptionActivity = new Intent(this, DescriptionActivity.class);
+        toDescriptionActivity.putExtra("title", title);
+        toDescriptionActivity.putExtra("logo", logo);
+        toDescriptionActivity.putExtra("descr", descr);
+        toDescriptionActivity.putExtra("image", image);
+        toDescriptionActivity.putExtra("site", site);
+        toDescriptionActivity.putExtra("x", end_x);
+        toDescriptionActivity.putExtra("y", end_y);
+        startActivity(toDescriptionActivity);
+    }
     private void OnGPS() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setMessage("Включить GPS?").setCancelable(false).setPositiveButton("Да", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
             }
-        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        }).setNegativeButton("Вернуться", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+                backToDescription();
             }
         });
         final AlertDialog alertDialog = builder.create();

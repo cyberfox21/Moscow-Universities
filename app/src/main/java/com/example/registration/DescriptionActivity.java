@@ -148,17 +148,15 @@ public class DescriptionActivity extends AppCompatActivity {
         toBrowser.putExtra("url", site);
         startActivity(Intent.createChooser(toBrowser, "Browser"));
     }
-    public void showPanorama(View view) {
-        Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
-        toPanoramaActivity.putExtra("x", x);
-        toPanoramaActivity.putExtra("y", y);
-        startActivity(toPanoramaActivity);
-    }
     public void showLocation(View view) {
         Intent toMapActivity = new Intent(this, MapActivity.class);
         toMapActivity.putExtra("title", title);
         toMapActivity.putExtra("x", x);
         toMapActivity.putExtra("y", y);
+        toMapActivity.putExtra("logo", logo);
+        toMapActivity.putExtra("descr", descr);
+        toMapActivity.putExtra("image", image);
+        toMapActivity.putExtra("site", site);
         startActivity(toMapActivity);
     }
     public void goBack() {
