@@ -103,8 +103,6 @@ public class DescriptionActivity extends AppCompatActivity {
         });
     }
 
-    private void openLocation() {
-    }
 
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
