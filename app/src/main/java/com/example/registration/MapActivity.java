@@ -58,7 +58,7 @@ import java.util.List;
 public class MapActivity extends AppCompatActivity implements Session.SearchListener, CameraListener, DrivingSession.DrivingRouteListener {
 
     private static final int REQUEST_LOCATION = 1;
-    private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
+    private final String MAPKIT_API_KEY = "480f0b96-5a09-4680-a09a-6ff7faa3833a";
     private EditText searchEdit;
     private LinearLayout searchLayout;
     private MapView mapView;
@@ -151,6 +151,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 switch (item.getItemId()) {
                     case R.id.action_location:
                         if(!KEY.equals("location")) {
+                            mapObjects.clear();
                             searchLayout.setVisibility(View.VISIBLE);
                             mContext = MapActivity.this;
                             mapView.getMap().addCameraListener(MapActivity.this);
@@ -196,7 +197,10 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
                             searchLayout.setVisibility(View.INVISIBLE);
                             mapView = findViewById(R.id.mapview);
-                            //mapObjects.clear();
+                            mapView.getMap().getMapObjects().addPlacemark(
+                                        ROUTE_START_LOCATION,
+                                        ImageProvider.fromResource(MapActivity.this, R.drawable.youarehere));
+                            //
                             final Point SCREEN_CENTER = new Point(
                                     (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
                                     (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
@@ -307,11 +311,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             ImageProvider.fromResource(this, R.drawable.pointer));
                 }
             }
-        }
-        if (KEY == "location"){
-            mapObjects.addPlacemark(
-                    resultLocation,
-                    ImageProvider.fromResource(this, R.drawable.pointer));
         }
     }
     @Override
