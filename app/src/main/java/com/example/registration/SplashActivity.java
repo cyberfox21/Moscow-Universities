@@ -20,10 +20,8 @@ public class SplashActivity extends AppCompatActivity {
         try {
             sleep(1000);
         } catch (Exception e) {
-
         }
-
-            setContentView(R.layout.activity_splash_screen);
+        setContentView(R.layout.activity_splash_screen);
         final Animation anim_2;
         anim_2 = AnimationUtils.loadAnimation(this,R.anim.back);
         final TextView tv = (TextView) findViewById(R.id.textView2);
@@ -35,15 +33,11 @@ public class SplashActivity extends AppCompatActivity {
                         super.run();
                         sleep(3000);
                     } catch (Exception e) {
-
                     } finally {
-
                         try {
                             runOnUiThread(new Runnable() {
-
                                 @Override
                                 public void run() {
-
                                     tv.startAnimation(anim_2);
                                     tv.setVisibility(View.INVISIBLE);
 
@@ -53,25 +47,14 @@ public class SplashActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-
-
-
-                        Intent i = new Intent(SplashActivity.this,
-                                MenuActivity.class);
-
+                        Intent i = new Intent(SplashActivity.this, MenuActivity.class);
                         startActivity(i);
-
                         finish();
-
                     }
                 }
             };
             welcomeThread.start();
-
     }
-
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

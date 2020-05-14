@@ -93,12 +93,8 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Add permission
-
         ActivityCompat.requestPermissions(this, new String []
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
 
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(MapActivity.this);
@@ -122,7 +118,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             OnGPS();
         }
-
         mContext = MapActivity.this;
         searchManager = SearchFactory.getInstance().createSearchManager(SearchManagerType.COMBINED);
         mapView = (MapView)findViewById(R.id.mapview);
@@ -142,7 +137,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         mapView.getMap().move(
                 new CameraPosition(new Point(end_x, end_y), 14.0f, 0.0f, 0.0f));
         submitQuery(searchEdit.getText().toString());
-
 
         toolBar = findViewById(R.id.toolBar);
         toolBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -170,18 +164,14 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             submitQuery(searchEdit.getText().toString());
                             KEY = "location";
                         }else {
-                            //Toast.makeText(MapActivity.this, "Location уже загружен", Toast.LENGTH_SHORT).show();
                         }
                         return true;
                     case R.id.action_route:
                         if(!KEY.equals("route")) {
 
                             if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-                                //Write function to enable gps
                                 OnGPS();
-                                Toast.makeText(MapActivity.this, "GPS is on", Toast.LENGTH_SHORT).show();
                             } else {
-                                //GPS is already ON
                                 getLocation();
                             }
 
@@ -200,7 +190,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             mapView.getMap().getMapObjects().addPlacemark(
                                         ROUTE_START_LOCATION,
                                         ImageProvider.fromResource(MapActivity.this, R.drawable.youarehere));
-                            //
                             final Point SCREEN_CENTER = new Point(
                                     (ROUTE_START_LOCATION.getLatitude() + ROUTE_END_LOCATION.getLatitude()) / 2,
                                     (ROUTE_START_LOCATION.getLongitude() + ROUTE_END_LOCATION.getLongitude()) / 2);
@@ -210,7 +199,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                             submitRequest();
                             KEY = "route";
                         }else {
-                            Toast.makeText(MapActivity.this, "Route уже загружен", Toast.LENGTH_SHORT).show();
                         }
                         return true;
                 }
@@ -226,7 +214,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         startActivity(toPanoramaActivity);
     }
     private void getLocation() {
-        //Check permissions again
         if(ActivityCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MapActivity.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
@@ -321,8 +308,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         } else if (error instanceof NetworkError) {
             errorMessage = getString(R.string.network_error_message);
         }
-
-        //Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onCameraPositionChanged(
@@ -337,7 +322,6 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     @Override
     public void onDrivingRoutes(List<DrivingRoute> routes) {
         for (DrivingRoute route : routes) {
-            //MapObjectCollection mapObjects = mapView.getMap().getMapObjects();
             mapObjects.addPolyline(route.getGeometry());
         }
     }

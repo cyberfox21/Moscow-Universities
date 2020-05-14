@@ -21,7 +21,7 @@ public class DescriptionActivity extends AppCompatActivity {
 
     private ImageView logo_d;
     private ImageView imageview;
-    private TextView descriptionTextView, textViewUniversityTitle;
+    private TextView descriptionTextView;
 
     private CollapsingToolbarLayout collapsingToolbar;
     private AppBarLayout appBarLayout;
@@ -58,7 +58,6 @@ public class DescriptionActivity extends AppCompatActivity {
         logo_d = findViewById(R.id.logo_d);
         imageview = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
-        //textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
         location_button = findViewById(R.id.location_button);
 
         Intent fromMenuActivity = getIntent();
@@ -99,7 +98,6 @@ public class DescriptionActivity extends AppCompatActivity {
                 }
             }
         });
-
         location_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,8 +105,6 @@ public class DescriptionActivity extends AppCompatActivity {
             }
         });
     }
-
-
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (collapsedMenu != null
                 && (!appBarExpanded || collapsedMenu.size() != 1)) {
@@ -119,7 +115,6 @@ public class DescriptionActivity extends AppCompatActivity {
         }
         return super.onPrepareOptionsMenu(collapsedMenu);
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -166,22 +161,4 @@ public class DescriptionActivity extends AppCompatActivity {
         Intent toMenuActivity = new Intent(this, MenuActivity.class);
         startActivity(toMenuActivity);
     }
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        if (hasFocus) {
-//            hideSystemUI();
-//        }
-//    }
-//    private void hideSystemUI() {
-//        View decorView = getWindow().getDecorView();
-//        decorView.setSystemUiVisibility(
-//                View.SYSTEM_UI_FLAG_IMMERSIVE
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
-//    }
-
 }
