@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import static java.lang.Thread.sleep;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-                        Intent i = new Intent(SplashScreen.this,
+                        Intent i = new Intent(SplashActivity.this,
                                 MenuActivity.class);
 
                         startActivity(i);

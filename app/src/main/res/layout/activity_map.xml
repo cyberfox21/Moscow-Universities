@@ -108,7 +108,7 @@
             <!--            app:itemBackground="?attr/colorPrimary"-->
             <!--            app:itemIconTint="@drawable/selector_bottombar"-->
             <!--            app:itemTextColor="@drawable/selector_bottombar"-->
-            <!--            app:menu="@menu/bottombar_menu" />-->
+            <!--            app:activity_menu="@activity_menu/bottombar_menu" />-->
 
 
 

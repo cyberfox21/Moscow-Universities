@@ -1,11 +1,8 @@
 package com.example.registration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.palette.graphics.Palette;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,13 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -60,12 +53,12 @@ public class DescriptionActivity extends AppCompatActivity {
             decorView.setSystemUiVisibility(uiOptions);
         }
 
-        setContentView(R.layout.activity_animate_toolbar);
+        setContentView(R.layout.activity_description);
 
         logo_d = findViewById(R.id.logo_d);
         imageview = findViewById(R.id.image_d);
         descriptionTextView = findViewById(R.id.text_d);
-        textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
+        //textViewUniversityTitle = findViewById(R.id.textViewUniversityTitle);
         location_button = findViewById(R.id.location_button);
 
         Intent fromMenuActivity = getIntent();
