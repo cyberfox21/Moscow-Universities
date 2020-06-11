@@ -46,16 +46,6 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT < 19) {
-            View v = this.getWindow().getDecorView();
-            v.setSystemUiVisibility(View.GONE);
-        } else {
-            View decorView = getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            decorView.setSystemUiVisibility(uiOptions);
-        }
-
         setContentView(R.layout.activity_chat);
 
         activity_main = findViewById(R.id.activity_main);
@@ -68,6 +58,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText textField = findViewById(R.id.messageField);
+                textField.setTextColor(getResources().getColor(R.color.white));
                 if(textField.getText().toString().equals(""))
                     return;
                 FirebaseDatabase.getInstance().getReference().child("Messages").child(title).push().setValue(
