@@ -24,5 +24,11 @@
         <item name="android:navigationBarColor">#000000</item>
     </style>
 
+    <style name="AppTheme_2" parent="AppTheme">
+        <!-- Customize your theme here. -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+
+    </style>
 
 </resources>

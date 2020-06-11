@@ -231,7 +231,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
                 longitude = locationNetwork.getLongitude();
             }
             else{
-                Toast.makeText(this, "Can't get user location", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Can't get user location", Toast.LENGTH_LONG).show();
                 start_x = 55.751853;
                 start_y = 37.679608;
                 backToDescription();

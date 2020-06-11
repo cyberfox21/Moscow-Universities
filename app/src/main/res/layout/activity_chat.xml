@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
+    style="@style/AppTheme_2"
     tools:context=".ChatActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -25,7 +26,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_layout"
         android:layout_width="match_parent"
+        android:textColorHint="@color/white"
         android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/btnSend"
@@ -33,7 +37,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/messageField"
-            android:textColor="@color/white"
+            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/input" />
