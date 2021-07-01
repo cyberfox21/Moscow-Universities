@@ -20,7 +20,7 @@ import com.yandex.runtime.network.RemoteError;
 
 public class PanoramaActivity extends Activity implements PanoramaService.SearchListener {
 
-    private final String MAPKIT_API_KEY = "43c9d950-1700-4d51-a9b1-817496ef789c";
+    private final String MAPKIT_API_KEY = "480f0b96-5a09-4680-a09a-6ff7faa3833a";
     private Point SEARCH_LOCATION;
     private PanoramaView panoramaView;
     private PanoramaService panoramaService;
@@ -30,8 +30,9 @@ public class PanoramaActivity extends Activity implements PanoramaService.Search
     protected void onCreate(Bundle savedInstanceState) {
         Intent fromDescriptionActivity = getIntent();
         Double x, y;
-        x = fromDescriptionActivity.getDoubleExtra("x", 0);
-        y = fromDescriptionActivity.getDoubleExtra("y", 0);
+        Card model = fromDescriptionActivity.getParcelableExtra("model");
+        x = model.getX();
+        y = model.getY();
         SEARCH_LOCATION = new Point(x, y);
         MapKitFactory.setApiKey(MAPKIT_API_KEY);
         MapKitFactory.initialize(this);

@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -52,7 +51,8 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = findViewById(R.id.btnSend);
 
         Intent fromDescriptionActivity = getIntent();
-        title =  fromDescriptionActivity.getStringExtra("title");
+        Card card = fromDescriptionActivity.getParcelableExtra("model");
+        title = card.getTitle();
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

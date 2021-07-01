@@ -86,6 +86,8 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
 
     private Context mContext;
 
+    private Card model;
+
     private BottomNavigationView toolBar;
 
     private String KEY = "location";
@@ -102,13 +104,14 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
         DirectionsFactory.initialize( MapActivity.this);
 
         Intent fromDescriptionActivity = getIntent();
-        title = fromDescriptionActivity.getStringExtra("title");
-        descr = fromDescriptionActivity.getStringExtra("descr");
-        site = fromDescriptionActivity.getStringExtra("site");
-        end_x = fromDescriptionActivity.getDoubleExtra("x", (Double) 55.733330);
-        end_y = fromDescriptionActivity.getDoubleExtra("y", (Double) 55.733330);
-        image = fromDescriptionActivity.getStringExtra("image");
-        logo = fromDescriptionActivity.getStringExtra("logo");
+        model = fromDescriptionActivity.getParcelableExtra("model");
+        title = model.getTitle();
+        descr = model.getDescr();
+        site = model.getSite();
+        end_x = model.getX();
+        end_y = model.getY();
+        image = model.getImage();
+        logo = model.getLogo();
 
         setContentView(R.layout.activity_map);
 
@@ -209,8 +212,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     }
     public void showPanorama(View view) {
         Intent toPanoramaActivity = new Intent(this, PanoramaActivity.class);
-        toPanoramaActivity.putExtra("x", end_x);
-        toPanoramaActivity.putExtra("y", end_y);
+        toPanoramaActivity.putExtra("model", model);
         startActivity(toPanoramaActivity);
     }
     private void getLocation() {
@@ -240,13 +242,7 @@ public class MapActivity extends AppCompatActivity implements Session.SearchList
     }
     private void backToDescription(){
         Intent toDescriptionActivity = new Intent(this, DescriptionActivity.class);
-        toDescriptionActivity.putExtra("title", title);
-        toDescriptionActivity.putExtra("logo", logo);
-        toDescriptionActivity.putExtra("descr", descr);
-        toDescriptionActivity.putExtra("image", image);
-        toDescriptionActivity.putExtra("site", site);
-        toDescriptionActivity.putExtra("x", end_x);
-        toDescriptionActivity.putExtra("y", end_y);
+        toDescriptionActivity.putExtra("model", model);
         startActivity(toDescriptionActivity);
     }
     private void OnGPS() {

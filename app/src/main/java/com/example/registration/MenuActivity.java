@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,17 +18,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MenuActivity extends AppCompatActivity{
+
+    private ArrayList resultList = new ArrayList();
 
     private EditText search_panel;
     private ImageButton searchBtn;
 
-    private FirebaseRecyclerAdapter<Card, CardViewHolder> firebaseRecyclerAdapter;
+    private MenuRecyclerAdapter adapter;
     private DatabaseReference universitiesDatabase;
     private Query firebaseSearchQuery;
 
@@ -44,8 +54,11 @@ public class MenuActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hideSystemUI();
+        //hideSystemUI();
         setContentView(R.layout.activity_menu);
+
+        adapter = new MenuRecyclerAdapter();
+        adapter.setContext(this);
 
         universitiesDatabase = FirebaseDatabase.getInstance().getReference("Universities");
 
@@ -55,6 +68,7 @@ public class MenuActivity extends AppCompatActivity{
         listOfCards = findViewById(R.id.list_of_cards);
         listOfCards.setHasFixedSize(true);
         listOfCards.setLayoutManager(new LinearLayoutManager(this));
+        listOfCards.setAdapter(adapter);
         search_panel.setOnClickListener(new View.OnClickListener() {
              @Override
               public void onClick(View v) {
@@ -74,57 +88,25 @@ public class MenuActivity extends AppCompatActivity{
     private void firebaseUniversitySearch(String searchText) {
         firebaseSearchQuery = universitiesDatabase.orderByChild("title").startAt(searchText).endAt(searchText + "\uf8ff");
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Card, CardViewHolder>(
-                Card.class, R.layout.card, CardViewHolder.class, firebaseSearchQuery
-        ) {
+        firebaseSearchQuery.addValueEventListener(new ValueEventListener() {
             @Override
-            protected void populateViewHolder(CardViewHolder viewHolder, Card model, int position) {
-                viewHolder.setDetails(getApplicationContext(), model.getTitle(), model.getTitle_descr(),
-                        model.getLogo(), model.getImage(), model.getDescr(),  model.getSite(), model.getX(), model.getY());
-            }
-        };
-
-        listOfCards.setAdapter(firebaseRecyclerAdapter);
-        listOfCards.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            GestureDetector gestureDetector = new GestureDetector(MenuActivity.this, new GestureDetector.SimpleOnGestureListener() {
-                @Override public boolean onSingleTapUp(MotionEvent motionEvent) {
-                    return true;
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                resultList.clear();
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    Card card = postSnapshot.getValue(Card.class);
+                    resultList.add(card);
                 }
-            });
-            @Override
-            public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-                View view = rv.findChildViewUnder(e.getX(), e.getY());
-                if(view != null && gestureDetector.onTouchEvent(e)) {
-                    title = ((TextView)(view.findViewById(R.id.card_title))).getText().toString();
-                    title_descr = ((TextView)(view.findViewById(R.id.card_descr))).getText().toString();
-                    descr = ((TextView)(view.findViewById(R.id.card_inv_descr))).getText().toString();
-                    image = ((TextView)(view.findViewById(R.id.card_inv_image))).getText().toString();
-                    logo = ((TextView)(view.findViewById(R.id.card_inv_logo))).getText().toString();
-                    site = ((TextView)(view.findViewById(R.id.card_inv_site))).getText().toString();
-                    x = ((TextView)(view.findViewById(R.id.card_inv_x))).getText().toString();
-                    y = ((TextView)(view.findViewById(R.id.card_inv_y))).getText().toString();
-
-                    Intent toDescriptionActivity = new Intent(MenuActivity.this, DescriptionActivity.class);
-                    toDescriptionActivity.putExtra("title", title);
-                    toDescriptionActivity.putExtra("logo", logo);
-                    toDescriptionActivity.putExtra("title_descr", title_descr);
-                    toDescriptionActivity.putExtra("descr", descr);
-                    toDescriptionActivity.putExtra("image", image);
-                    toDescriptionActivity.putExtra("site", site);
-                    toDescriptionActivity.putExtra("x", Double.parseDouble(x));
-                    toDescriptionActivity.putExtra("y", Double.parseDouble(y));
-                    startActivity(toDescriptionActivity);
-                }
-                return false;
+                adapter.updateList(resultList);
             }
-            @Override
-            public void onTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-            }
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("CHECKER", "loadPost:onCancelled", databaseError.toException());
+                // ...
             }
         });
+
     }
     public void enableSearchPanel(View v) {
         v.setFocusable(true);
@@ -132,28 +114,8 @@ public class MenuActivity extends AppCompatActivity{
         v.setFocusableInTouchMode(true);
         v.setClickable(true);
     }
-    public static class CardViewHolder extends RecyclerView.ViewHolder {
-        View view;
-        public CardViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-        }
-        public void setDetails(Context ctx, String card_title, String card_text, String card_image, String image, String descr, String card_site, Double card_x, Double card_y){
 
-            ((TextView)view.findViewById(R.id.card_title)).setText(card_title);
-            ((TextView)view.findViewById(R.id.card_descr)).setText(card_text);
-
-            Picasso.with(ctx).load(card_image).into((ImageView)view.findViewById(R.id.card_image));
-
-            ((TextView)(view.findViewById(R.id.card_inv_descr))).setText(descr);
-            ((TextView)(view.findViewById(R.id.card_inv_logo))).setText(card_image);
-            ((TextView)(view.findViewById(R.id.card_inv_image))).setText(image);
-            ((TextView)(view.findViewById(R.id.card_inv_site))).setText(card_site);
-            ((TextView)(view.findViewById(R.id.card_inv_x))).setText(card_x.toString());
-            ((TextView)(view.findViewById(R.id.card_inv_y))).setText(card_y.toString());
-        }
-    }
-
+    /*
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
     }
@@ -174,4 +136,6 @@ public class MenuActivity extends AppCompatActivity{
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN);
     }
+
+     */
 }

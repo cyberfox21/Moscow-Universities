@@ -1,6 +1,9 @@
 package com.example.registration;
 
-public class Card {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Card implements Parcelable {
 
     public String title;
     private String title_descr;
@@ -23,6 +26,66 @@ public class Card {
         this.logo = logo;
         this.image = image;
     }
+
+    protected Card(Parcel in) {
+        title = in.readString();
+        title_descr = in.readString();
+        descr = in.readString();
+        site = in.readString();
+        if (in.readByte() == 0) {
+            x = null;
+        } else {
+            x = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            y = null;
+        } else {
+            y = in.readDouble();
+        }
+        logo = in.readString();
+        image = in.readString();
+    }
+
+    public static final Creator<Card> CREATOR = new Creator<Card>() {
+        @Override
+        public Card createFromParcel(Parcel in) {
+            return new Card(in);
+        }
+
+        @Override
+        public Card[] newArray(int size) {
+            return new Card[size];
+        }
+    };
+
+     @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(title_descr);
+        dest.writeString(descr);
+        dest.writeString(site);
+        if (x == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(x);
+        }
+        if (y == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(y);
+        }
+        dest.writeString(logo);
+        dest.writeString(image);
+    }
+
+
 
     public String getTitle() {
         return title;
@@ -87,4 +150,6 @@ public class Card {
     public void setImage(String image) {
         this.image = image;
     }
+
+
 }

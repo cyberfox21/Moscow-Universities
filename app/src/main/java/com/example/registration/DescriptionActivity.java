@@ -30,14 +30,7 @@ public class DescriptionActivity extends AppCompatActivity {
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
 
-    String title;
-    String title_descr;
-    String descr;
-    String site;
-    String logo;
-    String image;
-    Double x;
-    Double y;
+    private Card model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +54,11 @@ public class DescriptionActivity extends AppCompatActivity {
         location_button = findViewById(R.id.location_button);
 
         Intent fromMenuActivity = getIntent();
-        title = fromMenuActivity.getStringExtra("title");
-        title_descr = fromMenuActivity.getStringExtra("title_descr");
-        descr = fromMenuActivity.getStringExtra("descr");
-        logo = fromMenuActivity.getStringExtra("logo");
-        image = fromMenuActivity.getStringExtra("image");
-        site = fromMenuActivity.getStringExtra("site");
-        x = fromMenuActivity.getDoubleExtra("x", 0);
-        y = fromMenuActivity.getDoubleExtra("y", 0);
+        model = fromMenuActivity.getParcelableExtra("model");
 
-        Picasso.with(DescriptionActivity.this).load(image).into(imageview);
-        Picasso.with(DescriptionActivity.this).load(logo).into(logo_d);
-        descriptionTextView.setText(descr);
+        Picasso.with(DescriptionActivity.this).load(model.getImage()).into(imageview);
+        Picasso.with(DescriptionActivity.this).load(model.getLogo()).into(logo_d);
+        descriptionTextView.setText(model.getDescr());
 
         final Toolbar toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
@@ -82,7 +68,7 @@ public class DescriptionActivity extends AppCompatActivity {
         appBarLayout = findViewById(R.id.appbar);
 
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(title);
+        collapsingToolbar.setTitle(model.getTitle());
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -138,23 +124,17 @@ public class DescriptionActivity extends AppCompatActivity {
     }
     public void openChat() {
         Intent toChatActivity = new Intent(this, ChatActivity.class);
-        toChatActivity.putExtra("title", title);
+        toChatActivity.putExtra("model", model);
         startActivity(toChatActivity);
     }
     public void showBalls(View view) {
-        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
-        toBrowser.putExtra("url", site);
+        Intent toBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse(model.getSite()));
+        toBrowser.putExtra("model", model);
         startActivity(Intent.createChooser(toBrowser, "Browser"));
     }
     public void showLocation(View view) {
         Intent toMapActivity = new Intent(this, MapActivity.class);
-        toMapActivity.putExtra("title", title);
-        toMapActivity.putExtra("x", x);
-        toMapActivity.putExtra("y", y);
-        toMapActivity.putExtra("logo", logo);
-        toMapActivity.putExtra("descr", descr);
-        toMapActivity.putExtra("image", image);
-        toMapActivity.putExtra("site", site);
+        toMapActivity.putExtra("model", model);
         startActivity(toMapActivity);
     }
     public void goBack() {
